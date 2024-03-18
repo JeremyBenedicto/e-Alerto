@@ -75,7 +75,7 @@
 .form-container{
    min-height: 100vh;
    filter: brightness(90%);
-   background-image: url(../assets/ddd.png);
+   background-image: url(../assets/2.png);
    background-size: cover;
    display: flex;
    align-items: center;
@@ -85,12 +85,12 @@
 
 .form-container form{
    padding:30px;
-  /* From https://css.glass */
-background: rgba(197, 197, 197, 0.79);
+ /* From https://css.glass */
+background: rgba(197, 197, 197, 0.36);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(8.9px);
--webkit-backdrop-filter: blur(8.9px);
+backdrop-filter: blur(7.4px);
+-webkit-backdrop-filter: blur(7.4px);
 border: 1px solid rgba(197, 197, 197, 0.85);
    box-shadow: var(--box-shadow);
    text-align: center;
@@ -122,7 +122,7 @@ border: 1px solid rgba(197, 197, 197, 0.85);
 }
 
 .form-container form p a{
-   color:var(--red);
+   color:white;
 }
 
 .form-container form p a:hover{
@@ -137,7 +137,6 @@ border: 1px solid rgba(197, 197, 197, 0.85);
    justify-content: center;
    padding:20px;
 }
-
 .container .profile{
    padding:20px;
    background-color: var(--white);
