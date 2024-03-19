@@ -47,8 +47,8 @@ if(mysqli_num_rows($admin_query) > 0){
       </div>
       <?php endif; ?>
       <div class="admin-actions">
-         <a href="admin_settings.php" class="btn">Admin Settings</a>
-         <a href="login.php" class="logout-btn">Logout</a>
+      <a href="update_profile.php" class="btn">update profile</a>
+         <a href="login.php" class="btn" style="background-color: red;">Logout</a>
       </div>
    </div>
 </div>
