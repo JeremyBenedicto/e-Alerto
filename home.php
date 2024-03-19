@@ -1,5 +1,4 @@
 <?php
-
 include 'config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
@@ -14,7 +13,17 @@ if(isset($_GET['logout'])){
    header('location:login.php');
 }
 
+
+$select = mysqli_query($conn, "SELECT email FROM `user_form` WHERE id = '$user_id'") or die('Query failed');
+if(mysqli_num_rows($select) > 0){
+    $fetch = mysqli_fetch_assoc($select);
+    if($fetch['email'] == "admin@gmail.com"){
+    
+        header('location:admin_interface.php');
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +33,7 @@ if(isset($_GET['logout'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>home</title>
 
-    <!-- custom css file link  -->
+
     <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -44,7 +53,8 @@ if(isset($_GET['logout'])){
             echo '<img src="uploaded_img/'.$fetch['image'].'">';
          }
       ?>
-      <h3><?php echo $fetch['name']; ?></h3>
+      <h3><?php echo $fetch['firstname']." " . $fetch['middlename']." " . $fetch['lastname']; ?></h3>
+      <h5><?php echo "Age: " .$fetch['age']; ?></h5>
       <a href="update_profile.php" class="btn">update profile</a>
       <a href="home.php?logout=<?php echo $user_id; ?>" class="delete-btn">logout</a>
       <p>new <a href="login.php">login</a> or <a href="register.php">register</a></p>
