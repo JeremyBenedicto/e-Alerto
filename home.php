@@ -57,7 +57,7 @@ if(mysqli_num_rows($select) > 0){
       <h5><?php echo "Age: " .$fetch['age']; ?></h5>
       <a href="update_profile.php" class="btn">update profile</a>
       <a href="home.php?logout=<?php echo $user_id; ?>" class="delete-btn">logout</a>
-      <p>new <a href="login.php">login</a> or <a href="register.php">register</a></p>
+      
    </div>
 
 </div>
