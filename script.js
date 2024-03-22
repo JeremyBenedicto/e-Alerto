@@ -1,68 +1,18 @@
-<?php
+// Get the modal
+var modal = document.getElementById("termsModal");
 
-include 'config.php';
-session_start();
+// Get the link that opens the modal
+var termsLink = document.getElementById("termsLink");
 
-if (isset($_POST['submit'])) {
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+// Get the container for terms and conditions content
+var termsContent = document.getElementById("termsContent");
 
-   $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email' AND password = '$pass'") or die('query failed');
-
-   if (mysqli_num_rows($select) > 0) {
-      $row = mysqli_fetch_assoc($select);
-      $_SESSION['user_id'] = $row['id'];
-      header('location:home.php');
-   } else {
-      $message[] = 'incorrect email or password!';
-   }
-}
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>login</title>
-
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
-
-</head>
-
-<body>
-
-   <div class="form-container">
-
-      <form action="" method="post" enctype="multipart/form-data">
-         <h3 style="color: white;">login now</h3>
-         <?php
-         if (isset($message)) {
-            foreach ($message as $message) {
-               echo '<div class="message">' . $message . '</div>';
-            }
-         }
-         ?>
-         <img style="height: 180px; margin:0 2rem 2rem 2rem;" src="assets/eALERTO.png" alt="">
-         <input type="email" name="email" placeholder="enter email" class="box" required>
-         <input type="password" name="password" placeholder="enter password" class="box" required>
-         <div class="input-group">
-            <input type="checkbox" id="termsCheckbox" required>
-            <label for="termsCheckbox">I agree to the <a href="#" id="termsLink">terms and conditions</a></label>
-         </div>
-         <input type="submit" name="submit" value="login now" class="btn">
-         <p>don't have an account? <a href="register.php">regiser now</a></p>
-      </form>
-
-   </div>
-   <div id="termsModal" class="modal">
-      <div class="modal-content">
-      <h1>Privacy Policy</h1>
+// Define the Privacy Policy content
+var privacyPolicy = `
+ <h1>Privacy Policy</h1>
          <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
          <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. </a>.</p>
          <h2>Interpretation and Definitions</h2>
@@ -221,14 +171,26 @@ if (isset($_POST['submit'])) {
          <h2>Contact Us</h2>
          <p>If you have any questions about this Privacy Policy, You can contact us:</p>
          <ul>
-            <li>By email: Jeremybenedicto2020@gmail.com<span class="close">close</span></li>
+            <li>By email: Jeremybenedicto2020@gmail.com<span class="close">&times;</span></li>
          </ul>
-         </ul>
-      </div>
-   </div>
+`;
 
-   <script src="script.js"></script>
+// When the user clicks the link, open the modal 
+termsLink.onclick = function() {
+    modal.style.display = "block";
+    
+    // Load Privacy Policy content
+    termsContent.innerHTML = privacyPolicy;
+}
 
-</body>
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
 
-</html>
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

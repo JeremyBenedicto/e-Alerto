@@ -103,8 +103,8 @@ if(isset($_POST['update_profile'])){
             <input type="password" name="confirm_pass" placeholder="confirm new password" class="box">
          </div>
       </div>
-      <input type="submit" value="update profile" name="update_profile" class="btn">
-      <a href="home.php" class="delete-btn">go back</a>
+      <input type="submit" value="Update Profile" name="update_profile" class="btn">
+      <a href="home.php" class="delete-btn">Go Back</a>
    </form>
 
 </div>

@@ -85,7 +85,6 @@
 
 .form-container form{
    padding:30px;
- /* From https://css.glass */
 background: rgba(197, 197, 197, 0.36);
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -137,7 +136,7 @@ border: 1px solid rgba(197, 197, 197, 0.85);
 
 .login-container {
    position: relative;
-   z-index: 2; /* Ensure the login container is on top */
+   z-index: 2;
 }
 
 .form-container form h3{
