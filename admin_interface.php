@@ -106,7 +106,7 @@ if (mysqli_num_rows($admin_query) > 0) {
 
       </div>
    </div>
-   <script src="admin.js"></script>
+   <script src="javascript/admin.js"></script>
 </body>
 
 </html>

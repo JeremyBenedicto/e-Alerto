@@ -89,6 +89,6 @@ if(isset($_POST['submit'])){
    </form>
       
 </div>
-<script src="java.js"></script>
+<script src="javascript/java.js"></script>
 </body>
 </html>

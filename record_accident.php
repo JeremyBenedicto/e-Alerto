@@ -10,6 +10,7 @@ if(isset($_POST['submit'])){
    $location = mysqli_real_escape_string($conn, $_POST['location']);
    $sex = mysqli_real_escape_string($conn, $_POST['sex']);
    $vehicle_type = mysqli_real_escape_string($conn, $_POST['vehicle_type']);
+   $date = mysqli_real_escape_string($conn, $_POST['date']);
    $mobile_number = mysqli_real_escape_string($conn, $_POST['mobile_number']);
    $image = $_FILES['image']['name'];
    $image_size = $_FILES['image']['size'];
@@ -24,8 +25,8 @@ if(isset($_POST['submit'])){
       if($image_size > 2000000){
          $message[] = 'Image size is too large!';
       } else {
-         $insert = mysqli_query($conn, "INSERT INTO `accident_record` (name, age, address, location, sex, vehicle_type, mobile_number, image)
-          VALUES ('$name', '$age', '$address', '$location', '$sex', '$vehicle_type', '$mobile_number', '$image')") or die('Query failed');
+         $insert = mysqli_query($conn, "INSERT INTO `accident_record` (name, age, address, location, sex, vehicle_type, date, mobile_number, image)
+          VALUES ('$name', '$age', '$address', '$location', '$sex', '$vehicle_type', '$date' , '$mobile_number', '$image')") or die('Query failed');
 
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);
@@ -51,7 +52,7 @@ if(isset($_POST['submit'])){
    crossorigin="anonymous" 
    referrerpolicy="no-referrer" /> 
    <title>Add Accident</title>
-   <link rel="stylesheet" href="record_accident.css">
+   <link rel="stylesheet" href="css/record_accident.css">
 
 </head>
 <body>
@@ -60,8 +61,7 @@ if(isset($_POST['submit'])){
 
    <form action="" method="post" enctype="multipart/form-data">
    <a href="admin_interface.php" class="x-button">
-  <i class="fas fa-times"></i>
-</a>
+                <img style="height: 30px;" src="assets/icon/left-arrow.png" alt=""></a>
       <h3>Accident Record Form</h3>
       <?php
       if(isset($message)){
@@ -86,12 +86,14 @@ if(isset($_POST['submit'])){
          <option value="Tricycle">Tricycle</option>
          <option value="4 Wheel Vehicle">4 Wheel Vehicle</option>
       </select>
+      <input type="date" name="date" class="box" required>
       <input type="text" name="mobile_number" placeholder="Enter Mobile Number" class="box" required>
       <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png">
       <input type="submit" name="submit" value="Add Record" class="btn">
+      <h3><a style="color: #aaa6a6; text-decoration:none;" href="view_records.php">View Records</a></h3>
    </form>
       
 </div>
-<script src="java.js"></script>
+<script src="javascript/java.js"></script>
 </body>
 </html>
