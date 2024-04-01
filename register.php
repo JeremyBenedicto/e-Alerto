@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include 'php/config.php';
 
 if(isset($_POST['submit'])){
 
@@ -18,6 +18,16 @@ if(isset($_POST['submit'])){
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'uploaded_img/'.$image;
 
+   // Generate a unique random number
+   $unique_id = mt_rand(100000, 999999);
+   
+   // Check if the generated random number already exists
+   $check_unique_id = mysqli_query($conn, "SELECT unique_id FROM `user_form` WHERE unique_id = '$unique_id'");
+   while(mysqli_num_rows($check_unique_id) > 0) {
+       $unique_id = mt_rand(100000, 999999);
+       $check_unique_id = mysqli_query($conn, "SELECT unique_id FROM `user_form` WHERE unique_id = '$unique_id'");
+   }
+
    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$email'") or die('Query failed');
 
    if(mysqli_num_rows($select) > 0){
@@ -28,8 +38,9 @@ if(isset($_POST['submit'])){
       } elseif($image_size > 2000000){
          $message[] = 'Image size is too large!';
       } else {
-         $insert = mysqli_query($conn, "INSERT INTO `user_form`(firstname, middlename, lastname, age, email, password, address, gender, image)
-          VALUES('$firstname', '$middlename', '$lastname', '$age', '$email', '$password', '$address', '$gender', '$image')") or die('Query failed');
+         $status = "Active now";
+         $insert = mysqli_query($conn, "INSERT INTO `user_form`(unique_id, firstname, middlename, lastname, age, email, password, address, gender, image, status)
+          VALUES('$unique_id', '$firstname', '$middlename', '$lastname', '$age', '$email', '$password', '$address', '$gender', '$image','$status')") or die('Query failed');
 
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);

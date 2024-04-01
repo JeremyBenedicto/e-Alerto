@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'php/config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
@@ -8,8 +8,11 @@ if (!isset($user_id)) {
 };
 
 if (isset($_GET['logout'])) {
+
+   $offline_status_query = mysqli_query($conn, "UPDATE `user_form` SET status = 'Offline Now' WHERE id = '$user_id'");
    unset($user_id);
    session_destroy();
+
    header('location:login.php');
 }
 
@@ -28,20 +31,27 @@ if (mysqli_num_rows($admin_query) > 0) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Interface</title>
-
    <link rel="stylesheet" href="css/admin.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+                        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+                        crossorigin="anonymous" 
+                        referrerpolicy="no-referrer" />
 </head>
 
 <body>
    <div class="container">
       <div class="main-body">
          <div class="upper">
-            <div class="windy"><img src="assets/eALERTO.png" alt="Image 1"></div>
+            <div class="windy"><iframe width="650" height="300" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=15.496&lon=121.333" frameborder="0"></iframe></div>
             <div class="weather-time"><img src="assets/eALERTO.png" alt="Image 2"></div>
          </div>
          <div class="lower">
-            <div class="graph"><img src="assets/eALERTO.png" alt="Image 3"></div>
-            <div class="news"><img src="assets/eALERTO.png" alt="Image 3"></div>
+            <div class="graph"><a class="weatherwidget-io" href="https://forecast7.com/en/15d52121d31/gabaldon/" data-label_1="GABALDON" data-label_2="WEATHER" data-theme="original" >GABALDON WEATHER</a>
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script></div>
+            <div class="news"></div>
+            <div class="add"><img style="height: 50px; width:50px;" src="assets/icon/image.png" alt=""></div>
          </div>
 
       </div>
@@ -67,14 +77,14 @@ if (mysqli_num_rows($admin_query) > 0) {
                   </div>
                </div>
 
-               <button id="popperBtn2" class="nav2"><img src="assets/icon/chat.png" alt=""></button>
-               <div id="popperContent2" class="popper-content">Hello, I am a popper for Chat!</div>
+               <button class="vsd" id="vsd"><img src="assets/icon/chat.png" alt=""></button>
+               
 
                <button id="popperBtn3" class="nav3"><img src="assets/icon/settings.png" alt=""></button>
                <div id="popperContent3" class="popper-content">
                   <div class="admin-actions">
                      <a href="update_profile.php" class="btn" id="red">Update Profile</a>
-                     <a href="login.php" class="btn" id="out">Logout</a>
+                     <a href="home.php?logout=<?php echo $user_id; ?>" class="btn" id="out">Logout</a>
                   </div>
                </div>
 
@@ -105,6 +115,34 @@ if (mysqli_num_rows($admin_query) > 0) {
          <?php endif; ?>
 
       </div>
+   </div>
+
+
+
+   <div id="minCard" class="min-card">
+      <button class="close-btn" id="close-Btn">&times;</button>
+      <div class="chathead">
+               
+               <?php if (!empty($admin_data['image'])) : ?>
+                  <img src="uploaded_img/<?php echo $admin_data['image']; ?>" alt="Admin Profile Image">
+               <?php else : ?>
+                  <img src="images/default-avatar.png" alt="Default Profile Image">
+               <?php endif; ?>
+               <div class="mes">
+               <h2>E-Message</h2>
+               <?php echo $admin_data['status'];?>
+               </div>
+      </div>
+      <section class="users">
+      <div class="search">
+        <span class="text">Select an user to start chat</span>
+        <input type="text" placeholder="Enter name to search...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="users-list">
+  
+      </div>
+    </section>
    </div>
    <script src="javascript/admin.js"></script>
 </body>

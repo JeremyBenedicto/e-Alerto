@@ -1,6 +1,3 @@
-   document.getElementById('popperBtn2').addEventListener('click', function () {
-        togglePopper('popperContent2');
-    });
 
     document.getElementById('popperBtn3').addEventListener('click', function () {
         togglePopper('popperContent3');
@@ -25,16 +22,74 @@
         }
     }
 
-      // JavaScript to handle button click and toggle mini card visibility
       document.getElementById('nav1').addEventListener('click', function() {
         var miniCard = document.getElementById('miniCard');
         miniCard.style.display = (miniCard.style.display === 'none') ? 'block' : 'none';
      });
 
-     // JavaScript to handle close button click
      document.getElementById('closeBtn').addEventListener('click', function() {
         var miniCard = document.getElementById('miniCard');
         miniCard.style.display = 'none';
      });
 
-     
+     document.getElementById('vsd').addEventListener('click', function() {
+        var miniCard = document.getElementById('minCard');
+        miniCard.style.display = (miniCard.style.display === 'none') ? 'block' : 'none';
+     });
+     document.getElementById('close-Btn').addEventListener('click', function() {
+        var miniCard = document.getElementById('minCard');
+        miniCard.style.display = 'none';
+     });
+
+     const searchBar = document.querySelector(".search input"),
+searchIcon = document.querySelector(".search button"),
+usersList = document.querySelector(".users-list");
+
+searchIcon.onclick = ()=>{
+  searchBar.classList.toggle("show");
+  searchIcon.classList.toggle("active");
+  searchBar.focus();
+  if(searchBar.classList.contains("active")){
+    searchBar.value = "";
+    searchBar.classList.remove("active");
+  }
+}
+
+searchBar.onkeyup = ()=>{
+  let searchTerm = searchBar.value;
+  if(searchTerm != ""){
+    searchBar.classList.add("active");
+  }else{
+    searchBar.classList.remove("active");
+  }
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "php/search.php", true);
+  xhr.onload = ()=>{
+    if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status === 200){
+          let data = xhr.response;
+          usersList.innerHTML = data;
+        }
+    }
+  }
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("searchTerm=" + searchTerm);
+}
+
+setInterval(() =>{
+  let xhr = new XMLHttpRequest();
+  xhr.open("GET", "php/users.php", true);
+  xhr.onload = ()=>{
+    if(xhr.readyState === XMLHttpRequest.DONE){
+        if(xhr.status === 200){
+          let data = xhr.response;
+          if(!searchBar.classList.contains("active")){
+            usersList.innerHTML = data;
+          }
+        }
+    }
+  }
+  xhr.send();
+}, 500);
+
+

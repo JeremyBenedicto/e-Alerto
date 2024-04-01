@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'php/config.php';
 
 $query = "SELECT * FROM `accident_record`";
 $result = mysqli_query($conn, $query);
