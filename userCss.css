@@ -1,0 +1,188 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-image: url('Assets/bg.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+   
+  .icon-container {
+    position: fixed;
+    bottom: 20px; /* Adjust distance from bottom */
+    left: 50%; /* Position at the center horizontally */
+    transform: translateX(-50%); /* Center the container horizontally */
+    z-index: 1001; /* Ensure it's above the glass effect box */
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: center; /* Align icons horizontally */
+    background: rgba(255, 255, 255, 0.2); /* Glass effect background */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    border-radius: 20px; 
+    padding: 10px; 
+    margin-bottom: -25px;
+  }
+  
+  /* Styles for the icons */
+  .icon-container span {
+    font-size: 50px; /* Adjust icon size */
+    height: 5px;
+    margin: 0 10px; /* Adjust spacing between icons */
+    cursor: pointer;
+  }
+  
+  .glass-effect {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Adjust the height as needed */
+    background: rgba(255, 255, 255, 0.2); /* Transparent white background */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    z-index: 1000; /* Ensure it's above other content */
+    border-radius: 20px; /* Border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text-form {
+    flex: 1; /* Take remaining space */
+    margin-top: 0px; /* Add margin to separate from the report text */
+}
+.text-form input[type="text"] {
+    width: calc(100%  500px); /* Adjust width of the input field */
+    height: 30px; /* Set height of the input field */
+    border-radius: 10px;
+}
+
+.text-button-container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    align-items: flex-start; /* Align items at the start of the container */
+    margin-top: 10px; /* Add margin to separate the container from the logo/report text */
+}
+
+/* Additional styling for the report button */
+.report-button {
+    background-color: #ff0000; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.logo-report-container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    align-items: center; /* Align items vertically */
+}
+.logo {
+    width: 100px; /* Adjust logo width */
+    margin-right: 10px; /* Add margin to separate logo from text */
+}
+
+.report-text {
+    color: #000000; /* Set the text color */
+    font-weight: bold; /* Set font weight */
+   
+    cursor: pointer; /* Set cursor to pointer */
+    position: absolute; /* Position report text absolutely */
+    top: 10px; /* Adjust distance from the top */
+    left: 50%; /* Position at the center horizontally */
+    transform: translateX(-50%); /* Center the text horizontally */
+    z-index: 1002; /* Ensure it's above other content */
+}
+.box {
+    /* Your existing box styles */
+    position: fixed;
+    top: 140px;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    background: rgba(255, 255, 255, 1);
+    z-index: 1000;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure images don't overflow the box */
+  }
+  
+  .slideshow-container {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .mySlides {
+    width: 100%; /* Ensure images take full width of the box */
+    height: 100%; /* Ensure images take full height of the box */
+    object-fit: cover; /* Ensure images are fitted inside the box without distortion */
+    display: none; /* Hide all images initially */
+  }
+  
+  .container {
+    position: fixed;
+    margin-top: 300px;
+    background-color: #fffbfb;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 90%; /* Limit maximum width for larger screens */
+    width: 100%;
+}
+
+.weather-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.weather-description {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.temperature {
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.additional-info {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.info-item {
+    margin-bottom: 10px;
+}
+
+.info-label {
+    color: #666;
+}
+
+.info-value {
+    color: #333;
+}
+
+.update-time {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+}
+

@@ -3,6 +3,7 @@ include 'php/config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
+
 if (!isset($user_id)) {
    header('location:login.php');
 };
@@ -22,6 +23,31 @@ $admin_query = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$ad
 if (mysqli_num_rows($admin_query) > 0) {
    $admin_data = mysqli_fetch_assoc($admin_query);
 }
+
+// Database connection (replace with your own details)
+$db_host = 'localhost';
+$db_username = 'root';
+$db_password = '';
+$db_name = 'user_db';
+
+$conn = new mysqli($db_host, $db_username, $db_password, $db_name);
+if ($conn->connect_error) {
+    die('Connection failed: ' . $conn->connect_error);
+}
+
+// Fetch photos from the database
+$sql = "SELECT photo_path FROM photos";
+$result = $conn->query($sql);
+
+$photos = array();
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $photos[] = $row['photo_path'];
+    }
+}
+
+// Close connection
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,8 +76,18 @@ if (mysqli_num_rows($admin_query) > 0) {
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
 </script></div>
-            <div class="news"></div>
-            <div class="add"><img style="height: 50px; width:50px;" src="assets/icon/image.png" alt=""></div>
+            <div class="news">
+            <div class="slideshow-container">
+    <?php foreach ($photos as $photo): ?>
+        <div class="mySlides fade">
+            <img src="<?php echo $photo; ?>" style="width:26rem; height:15rem">
+        </div>
+    <?php endforeach; ?>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+            </div>
+            <div class="add" id="add"><a href="index.php"><img style="height: 50px; width:50px;" src="assets/icon/image.png" alt=""></a></div>
          </div>
 
       </div>
@@ -144,6 +180,25 @@ if (mysqli_num_rows($admin_query) > 0) {
       </div>
     </section>
    </div>
+
+   <div id="miCard" class="mi-card">
+      <button class="close-btn" id="close-Btn">&times;</button> 
+   <div class="con">
+    <a href="admin_interface.php" class="x-button"><img style="height: 30px;" src="assets/icon/left-arrow.png" alt=""></i></a>
+<div class="upload1">
+    <h1>Upload Photo</h1>
+    <!-- Custom file input button -->
+    <label for="photo" class="upload-btn">Choose Photo</label>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="photo" id="photo">
+        <button type="submit">Upload</button>
+    </form>
+    <div id="message"></div>
+</div>
+</div>
+   </div>
+
+
    <script src="javascript/admin.js"></script>
 </body>
 

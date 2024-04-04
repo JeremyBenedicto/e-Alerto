@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
             <label for="termsCheckbox">I agree to the <a href="#" id="termsLink">terms and conditions</a></label>
          </div>
          <input type="submit" name="submit" value="login now" class="btn">
-         <p>don't have an account? <a href="register.php">regiser now</a></p>
+         <p>don't have an account? <a href="register.php">register now</a></p>
       </form>
 
    </div>

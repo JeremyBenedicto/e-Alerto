@@ -32,6 +32,8 @@
         miniCard.style.display = 'none';
      });
 
+     
+
      document.getElementById('vsd').addEventListener('click', function() {
         var miniCard = document.getElementById('minCard');
         miniCard.style.display = (miniCard.style.display === 'none') ? 'block' : 'none';
@@ -40,6 +42,7 @@
         var miniCard = document.getElementById('minCard');
         miniCard.style.display = 'none';
      });
+
 
      const searchBar = document.querySelector(".search input"),
 searchIcon = document.querySelector(".search button"),
@@ -93,3 +96,21 @@ setInterval(() =>{
 }, 500);
 
 
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    slides[slideIndex-1].style.display = "block";  
+    setTimeout(showSlides, 5000);
+}
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
