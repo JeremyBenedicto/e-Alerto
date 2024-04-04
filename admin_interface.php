@@ -181,23 +181,6 @@ $conn->close();
     </section>
    </div>
 
-   <div id="miCard" class="mi-card">
-      <button class="close-btn" id="close-Btn">&times;</button> 
-   <div class="con">
-    <a href="admin_interface.php" class="x-button"><img style="height: 30px;" src="assets/icon/left-arrow.png" alt=""></i></a>
-<div class="upload1">
-    <h1>Upload Photo</h1>
-    <!-- Custom file input button -->
-    <label for="photo" class="upload-btn">Choose Photo</label>
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" name="photo" id="photo">
-        <button type="submit">Upload</button>
-    </form>
-    <div id="message"></div>
-</div>
-</div>
-   </div>
-
 
    <script src="javascript/admin.js"></script>
 </body>
