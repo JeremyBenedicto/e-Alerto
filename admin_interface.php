@@ -146,6 +146,7 @@ $conn->close();
                <h5>Admin</h5>
                <h3>Email: <?php echo $admin_data['email']; ?></h3>
                <h3>Age: <?php echo $admin_data['age']; ?></h3>
+               <h5><?php echo $admin_data['cpnum']; ?></h5>
                <h3>Address: <?php echo $admin_data['address']; ?></h3>
             </div>
          <?php endif; ?>

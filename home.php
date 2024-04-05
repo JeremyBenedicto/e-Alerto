@@ -3,147 +3,99 @@ include 'php/config.php';
 session_start();
 $user_id = $_SESSION['user_id'];
 
-if (!isset($user_id)) {
+if(!isset($user_id)){
    header('location:login.php');
-}
+};
 
-if (isset($_GET['logout'])) {
-   // Update user status to "Offline Now"
-   $update_query = mysqli_query($conn, "UPDATE `user_form` SET status = 'Offline Now' WHERE id = '$user_id'");
-   
-   // Unset user_id and destroy session
+if(isset($_GET['logout'])){
    unset($user_id);
    session_destroy();
    header('location:login.php');
 }
 
+
 $select = mysqli_query($conn, "SELECT email FROM `user_form` WHERE id = '$user_id'") or die('Query failed');
-if (mysqli_num_rows($select) > 0) {
-   $fetch = mysqli_fetch_assoc($select);
-   if ($fetch['email'] == "admin@gmail.com") {
-      header('location:admin_interface.php');
-   }
+if(mysqli_num_rows($select) > 0){
+    $fetch = mysqli_fetch_assoc($select);
+    if($fetch['email'] == "admin@gmail.com"){
+    
+        header('location:admin_interface.php');
+    }
 }
+$admin_email = "admin@gmail.com";
+$admin_query = mysqli_query($conn, "SELECT * FROM `user_form` WHERE email = '$admin_email'") or die('Query failed');
+if (mysqli_num_rows($admin_query) > 0) {
+   $admin_data = mysqli_fetch_assoc($admin_query);
+}
+
 ?>
 
-
-<?php
-$apiKey = "95c6c917d1860ea97c9b3c8837ee3fd9";
-$cityId = "1713498";
-$googleApiUrl = "https://api.openweathermap.org/data/2.5/weather?id=" . $cityId . "&lang=en&units=metric&APPID=" . $apiKey;
-
-$ch = curl_init();
-
-curl_setopt($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_URL, $googleApiUrl);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($ch, CURLOPT_VERBOSE, 0);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-$response = curl_exec($ch);
-
-curl_close($ch);
-$data = json_decode($response);
-
-// Set the timezone to your desired location
-date_default_timezone_set('Asia/Manila');
-
-// Get the current time in the specified timezone
-$currentTime = new DateTime('now');
-?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App</title>
-    <link rel="stylesheet" href="userCss.css">
-    <style>
-       
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Interface with Tabs</title>
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+                        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+                        crossorigin="anonymous" 
+                        referrerpolicy="no-referrer" />
+</head>
 </head>
 <body>
-    
-<div class="glass-effect">
-    <!-- Logo and Report text container -->
-    <div class="logo-report-container">
-        <!-- Logo -->
-        <img src="Assets/logo.png" alt="Logo" class="logo">
-        <!-- Report text on top -->
-        <div class="report-text">Report Now</div>
+  <div class="content">
+    <div id="tab1" class="tab-content active">
+      <h1>Tab 1 Content</h1>
+      <p>This is the content for Tab 1.</p>
     </div>
-    <!-- Text form and report button container -->
-    <div class="text-button-container">
-        <!-- Text form on the left -->
-        <form class="text-form" action="#">
-            <input type="text" name="text" placeholder="Enter text here">
-        </form>
-        <!-- Report button on the right -->
-        <button class="report-button">Report</button>
+    <div id="tab2" class="tab-content">
+        <h2 style="text-align: center;color:antiquewhite;padding:1rem 1rem 0 1rem;">Profile</h2>
+        <div class="content2">
+            <div class="headpro">
+        <?php if (!empty($admin_data['image'])) : ?>
+                     <img src="uploaded_img/<?php echo $admin_data['image']; ?>" alt="Admin Profile Image">
+                  <?php else : ?>
+                     <img src="images/default-avatar.png" alt="Default Profile Image">
+                  <?php endif; ?>
+                  <div class="namepro">
+               <h3><?php echo $admin_data['firstname'] . " " . $admin_data['middlename'] . " " . $admin_data['lastname']; ?></h3>
+                    <h5><i class="fa-solid fa-phone"></i><?php echo $admin_data['cpnum']; ?></h5>
+               </div>
+               </div>
+               <br><br>
+            <div class="pInfo"><i class="fa-solid fa-envelope"></i><?php echo $admin_data['email']; ?></div>
+            <div class="pInfo"><i class="fa-solid fa-location-dot"></i><?php echo $admin_data['address']; ?></div>
+            <div class="pInfo"><i class="fa-solid fa-user"></i><?php echo $admin_data['age']; ?></div>
+            <div class="pInfo" ><i class="fa-solid fa-person-half-dress"></i><?php echo $admin_data['gender']; ?></div>
+            <div id="last"><br><br></div>
+            <div class="pInfo" id="logout"><a href="home.php?logout=<?php echo $user_id; ?>"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a></div>
+               </div>
     </div>
-</div>
-
-<div class="box">
-  <div class="slideshow-container">
-    <img class="mySlides" src="Assets/1.png">
-    <img class="mySlides" src="Assets/2.png">
-    <img class="mySlides" src="Assets/logo.png">
+    <div id="tab3" class="tab-content">
+      <h1>Tab 3 Content</h1>
+      <p>This is the content for Tab 3.</p>
+    </div>
+    <div id="tab4" class="tab-content">
+      <h1>Tab 4 Content</h1>
+      <p>This is the content for Tab 4.</p>
+    </div>
+    <div id="tab5" class="tab-content">
+      <h1>Tab 5 Content</h1>
+      <p>This is the content for Tab 5.
+      
+      </p>
+    </div>
   </div>
-</div>
-                <script>
-                    let slideIndex = 0;
-                    showSlides();
+  <div class="tabs">
+    <button class="tab" onclick="showTab('tab1')"><img src="assets/icon/home.png" alt=""></button>
+    <button class="tab" onclick="showTab('tab2')"><img src="assets/icon/user.png" alt=""></button>
+    <button class="tab" onclick="showTab('tab3')"><img src="assets/icon/info.png" alt=""></button>
+    <button class="tab" onclick="showTab('tab4')"><img src="assets/icon/message.png" alt=""></button>
+    <button class="tab" onclick="showTab('tab5')"><img src="assets/icon/setting.png" alt=""></button>
+  </div>
 
-                    function showSlides() {
-                    let i;
-                    const slides = document.getElementsByClassName("mySlides");
-                    for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";  
-                    }
-                    slideIndex++;
-                    if (slideIndex > slides.length) {slideIndex = 1}    
-                    slides[slideIndex-1].style.display = "block";  
-                    setTimeout(showSlides, 2000); // Change image every 2 seconds (adjust as needed)
-                    }
-                </script>
-           
-           <div class="container">
-    <h2><?php echo $data->name; ?> Weather Forecast</h2>
-    <img src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png" class="weather-icon" alt="Weather Icon">
-    <div class="weather-description"><?php echo ucwords($data->weather[0]->description); ?></div>
-    <div class="temperature"><?php echo round($data->main->temp); ?>&deg;C</div>
-    <div class="additional-info">
-        <div class="info-item">
-            <span class="info-label">Humidity:</span>
-            <span class="info-value"><?php echo $data->main->humidity; ?>%</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Wind:</span>
-            <span class="info-value"><?php echo $data->wind->speed; ?> km/h</span>
-        </div>
-    </div>
-    <div class="update-time">
-        Last Updated: <?php echo $currentTime->format('jS F, Y - g:i a'); ?>
-    </div>
-</div>
-
-
-
-
-
-<div class="icon-container">
-    <a href="chat.php">
-        <img src="Assets/chat.png" alt="chat.php" style="width: 50px; height: 50px;">
-    </a>
-    <a href="profile.php">
-        <img src="Assets/profile.png" alt="profile.php" style="width: 50px; height: 50px;">
-    </a>
-    <a href="setting.php">
-        <img src="Assets/settings.png" alt="setting.php" style="width: 50px; height: 50px;">
-    </a>
-</div>
-
-
+  <script src="javascript/home.js"></script>
 </body>
 </html>

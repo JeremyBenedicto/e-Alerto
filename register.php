@@ -9,6 +9,7 @@ if(isset($_POST['submit'])){
    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
    $age = mysqli_real_escape_string($conn, $_POST['age']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $cpnum = mysqli_real_escape_string($conn, $_POST['cpnum']);
    $password = mysqli_real_escape_string($conn, md5($_POST['password']));
    $cpassword = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
    $address = mysqli_real_escape_string($conn, $_POST['address']);
@@ -39,8 +40,8 @@ if(isset($_POST['submit'])){
          $message[] = 'Image size is too large!';
       } else {
          $status = "Active now";
-         $insert = mysqli_query($conn, "INSERT INTO `user_form`(unique_id, firstname, middlename, lastname, age, email, password, address, gender, image, status)
-          VALUES('$unique_id', '$firstname', '$middlename', '$lastname', '$age', '$email', '$password', '$address', '$gender', '$image','$status')") or die('Query failed');
+         $insert = mysqli_query($conn, "INSERT INTO `user_form`(unique_id, firstname, middlename, lastname, age, email, cpnum, password, address, gender, image, status)
+          VALUES('$unique_id', '$firstname', '$middlename', '$lastname', '$age', '$email', '$cpnum' , '$password', '$address', '$gender', '$image','$status')") or die('Query failed');
 
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);
@@ -85,6 +86,7 @@ if(isset($_POST['submit'])){
       <input type="text" name="middlename" placeholder="Enter Middle Name" class="box" required>
       <input type="text" name="lastname" placeholder="Enter Last Name" class="box" required>
       <input type="number" name="age" placeholder="Enter Age" class="box" required>
+      <input type="number" name="cpnum" placeholder="Enter Contact Number" class="box" required>
       <input type="email" name="email" placeholder="Enter Email" class="box" required>
       <input type="password" name="password" placeholder="Enter Password" class="box" required>
       <input type="password" name="cpassword" placeholder="Confirm Password" class="box" required>
