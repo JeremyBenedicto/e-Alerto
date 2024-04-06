@@ -484,7 +484,7 @@ button {
 
 .emergency-section {
   padding: 20px;
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   border: 1px solid #dee2e6;
   border-radius: 5px;
   max-height: 550px; 
@@ -497,11 +497,12 @@ button {
 
 .message-item {
   border: 1px solid #ced4da;
-  border-radius: 5px;
+  border-radius: 25px;
   padding: 15px;
   margin-bottom: 20px;
-  background-color: #fff;
+  background-color: #f3f3f3;
   display: flex;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
   justify-content: center;
   align-self: center;
   flex-direction: row;
