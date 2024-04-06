@@ -101,7 +101,9 @@ $conn->close();
       <!-- navigator -->
       <div class="left-body">
          <div class="logo">
-            <img style="height: 150px;" src="assets/eALERTO.png" alt="eALERTO logo">
+            <div class="logo1">
+            <img style="height: 150px;border-radius:100px;" src="assets/logo/main_logo_1.JPG" alt="eALERTO logo">
+            </div>
          </div>
          <div class="right-nav">
             <div class="back">
