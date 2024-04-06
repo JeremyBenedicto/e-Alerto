@@ -35,6 +35,13 @@ if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
 
+$emergency_messages_query = mysqli_query($conn, "SELECT messages.*, user_form.firstname, user_form.lastname, user_form.image
+                                                FROM messages 
+                                                INNER JOIN user_form ON messages.user_id = user_form.id 
+                                                ORDER BY messages.timestamp DESC") or die('Query failed');
+
+
+
 // Fetch photos from the database
 $sql = "SELECT photo_path FROM photos";
 $result = $conn->query($sql);
@@ -146,7 +153,6 @@ $conn->close();
                <h5>Admin</h5>
                <h3>Email: <?php echo $admin_data['email']; ?></h3>
                <h3>Age: <?php echo $admin_data['age']; ?></h3>
-               <h5><?php echo $admin_data['cpnum']; ?></h5>
                <h3>Address: <?php echo $admin_data['address']; ?></h3>
             </div>
          <?php endif; ?>
@@ -171,15 +177,41 @@ $conn->close();
                </div>
       </div>
       <section class="users">
-      <div class="search">
+      <div style="display: none;" class="search">
         <span class="text">Select an user to start chat</span>
         <input type="text" placeholder="Enter name to search...">
         <button><i class="fas fa-search"></i></button>
       </div>
-      <div class="users-list">
-  
-      </div>
     </section>
+
+    <div class="emergency-section">
+   <div class="message-list">
+      <?php
+         $sorted_messages = array();
+         if (mysqli_num_rows($emergency_messages_query) > 0) {
+            while ($row = mysqli_fetch_assoc($emergency_messages_query)) {
+               $sorted_messages[] = $row;
+            }
+            usort($sorted_messages, function($a, $b) {
+               return strtotime($b['timestamp']) - strtotime($a['timestamp']);
+            });
+            foreach ($sorted_messages as $message) {
+               echo "<div class='message-item'>";
+               echo "<img src='uploaded_img/" . $message['image'] . "' alt='Profile Image'>";
+               echo "<div class='des'>";
+               echo "<p><strong>" . $message['firstname'] . " " . $message['lastname'] . "</strong></p>";
+               echo "<p><strong>Message:</strong> " . $message['message'] . "</p>";
+               echo "<p><strong>Timestamp:</strong> " . $message['timestamp'] . "</p>";
+               echo "</div>";
+               echo "</div>";
+            }
+         } else {
+            echo "<p>No emergency messages found.</p>";
+         }
+      ?>
+   </div>
+</div>
+
    </div>
 
 

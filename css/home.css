@@ -177,6 +177,12 @@ body {
   align-items: center;
   flex-direction: column;
 }
+form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .emergency input {
   border: none;
@@ -184,12 +190,17 @@ body {
   background: #e0e0e0;
   box-shadow: inset 5px 5px 11px #afafaf,
     inset -5px -5px 11px #ffffff;
-  padding: 1rem 3rem;
+  padding: 1rem ;
   outline: none;
   height: 50px;
-  width: 80%;
-  font-size: large;
+  width: 90%;
+  font-size: 12px;
   border-radius: 10px;
+}
+.alert img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .emergency img {
@@ -311,6 +322,10 @@ body {
 .prev:hover, .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+
+
+
 
 
 .dark-mode {
@@ -472,3 +487,7 @@ body {
     font-size: large;
   }
 }
+
+
+
+

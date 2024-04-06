@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
 
    <div class="form-container">
 
-      <form action="" method="post" enctype="multipart/form-data">
+      <form action="#" method="post" enctype="multipart/form-data">
          <h3 style="color: white;">login now</h3>
          <?php
          if (isset($message)) {

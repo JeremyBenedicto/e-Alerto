@@ -37,8 +37,6 @@ if ($result->num_rows > 0) {
         $photos[] = $row;
     }
 }
-
-// Close connection
 $conn->close();
 ?>
 

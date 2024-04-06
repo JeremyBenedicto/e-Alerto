@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2024 at 06:04 AM
+-- Generation Time: Apr 06, 2024 at 11:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -56,29 +56,19 @@ INSERT INTO `accident_record` (`accident_id`, `name`, `age`, `address`, `locatio
 --
 
 CREATE TABLE `messages` (
-  `msg_id` int(11) NOT NULL,
-  `incoming_msg_id` int(255) NOT NULL,
-  `outgoing_msg_id` int(255) NOT NULL,
-  `msg` varchar(1000) NOT NULL
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `unique_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) VALUES
-(13, 805713, 573836844, 'hi'),
-(14, 625685, 573836844, 'hakdog'),
-(15, 389059, 573836844, 'g'),
-(16, 389059, 573836844, 'tar ml4'),
-(17, 625685, 573836844, 'sss'),
-(18, 389059, 1258838597, 'ddgfdgf'),
-(19, 625685, 573836844, 'hello'),
-(20, 389059, 573836844, 'tanga'),
-(21, 625685, 1258838597, 'hi'),
-(22, 625685, 1258838597, 'hello'),
-(23, 389059, 1258838597, 'otw'),
-(24, 805713, 1258838597, 'hi');
+INSERT INTO `messages` (`id`, `user_id`, `unique_id`, `message`, `timestamp`) VALUES
+(1, 18, 66110, 'may sunog', '2024-04-06 09:03:39');
 
 -- --------------------------------------------------------
 
@@ -97,11 +87,10 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`photo_id`, `photo_path`, `photo_type`) VALUES
-(42, 'uploads/final 1.jpg', 'image/jpeg'),
-(43, 'uploads/final 4.jpg', 'image/jpeg'),
-(44, 'uploads/SPORTS.png', 'image/png'),
-(45, 'uploads/final 2.jpg', 'image/jpeg'),
-(46, 'uploads/final 3.jpg', 'image/jpeg');
+(47, 'uploads/5.png', 'image/png'),
+(48, 'uploads/ddd.png', 'image/png'),
+(50, 'uploads/SPORTS.png', 'image/png'),
+(51, 'uploads/final 3.jpg', 'image/jpeg');
 
 -- --------------------------------------------------------
 
@@ -135,7 +124,8 @@ INSERT INTO `user_form` (`id`, `unique_id`, `firstname`, `email`, `cpnum`, `pass
 (15, 625685, 'Sam', 'sam@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'Russel', 'Cabaltica', 22, 'Sawmill', 'male', 'Active Now'),
 (16, 389059, 'owera', 'owera@gmail.com', '0', '202cb962ac59075b964b07152d234b70', 'logo.png', 'ernez', 'umali', 23, 'apayuc', 'male', 'Active Now'),
 (17, 125385, 'Sir Dane', 'Dane@gmail.com', '0', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'Irang', 'Sisor', 18, 'South', 'male', 'Offline Now'),
-(18, 731219, 'Rafael', 'johnrafaellee@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'ff704ac8d94d61ac042a9a579399332e.png', 'Benedicto', 'Lee', 22, 'Tagumpay', 'male', 'Active Now');
+(18, 731219, 'Rafael', 'johnrafaellee@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'ff704ac8d94d61ac042a9a579399332e.png', 'Benedicto', 'Lee', 22, 'Tagumpay', 'male', 'Active Now'),
+(19, 756548, 'a', 'a@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'appLogo.png', 'a', 'a', 12, 'Tagumpay', 'female', 'Active Now');
 
 --
 -- Indexes for dumped tables
@@ -151,7 +141,7 @@ ALTER TABLE `accident_record`
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
-  ADD PRIMARY KEY (`msg_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `photos`
@@ -179,19 +169,19 @@ ALTER TABLE `accident_record`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `photo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `photo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `user_form`
 --
 ALTER TABLE `user_form`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

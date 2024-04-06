@@ -55,14 +55,29 @@ $response = curl_exec($ch);
 curl_close($ch);
 $data = json_decode($response);
 
-// Set the timezone to your desired location
 date_default_timezone_set('Asia/Manila');
 
-// Get the current time in the specified timezone
+
 $currentTime = new DateTime('now');
 
 
+if (isset($_POST['submit_message'])) {
+   $message = mysqli_real_escape_string($conn, $_POST['emergency_message']);
+   $unique_id = uniqid(); 
+   $user_id = $_SESSION['user_id'];
+   $timestamp = date('Y-m-d H:i:s');
 
+
+   $insert_query = "INSERT INTO messages (user_id, unique_id, message, timestamp) VALUES ('$user_id', '$unique_id', '$message', '$timestamp')";
+   if (mysqli_query($conn, $insert_query)) {
+       
+       echo "";
+   } else {
+       
+       echo "";
+   }
+}
+$emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY timestamp DESC") or die('Query failed');
 
 ?>
 
@@ -151,16 +166,18 @@ $currentTime = new DateTime('now');
       <div id="tab3" class="tab-content">
          <div class="emergency">
             <h2>Emergency Report</h2>
-            <input type="text" name="report" id="report" placeholder="Enter type of accident here.." required>
-            <button class="alert"><img src="assets/icon/info.png" alt=""></button>
-             <h3>For your information!</h3> 
+            <form action="#" method="post">
+            <input type="text" name="emergency_message" id="emergency_message" placeholder="Enter type of accident here.." required>
+            <button class="alert" name="submit_message"><img src="assets/icon/info.png" alt=""></button>
+         </form>
+             <h3 style="text-align: center;">For your information!</h3> 
              <h4 style="text-align: center;margin-top:-.5rem;"> If you click that button, your personal information and current location will be sent to the MDRRMO.</h4>
          </div>
       </div>
       <div id="tab4" class="tab-content">
-         <h1>Tab 4 Content</h1>
-         <p>This is the content for Tab 4.</p>
-      </div>
+
+  </div>
+
       <div id="tab5" class="tab-content">
 
          <div class="content2">

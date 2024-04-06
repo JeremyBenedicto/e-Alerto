@@ -128,7 +128,7 @@
             header("location: users.php");
           }
         ?>
-        <a href="admin_interface.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+        <a href="users.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
         <img src="uploaded_img/<?php echo $row['image']; ?>" alt="">
         <div class="details">
           <span><?php echo $row['firstname']. " " . $row['lastname'] ?></span>
