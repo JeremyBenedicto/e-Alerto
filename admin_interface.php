@@ -188,6 +188,7 @@ $conn->close();
 
     <div class="emergency-section">
    <div class="message-list">
+   <div id="chat-messages"></div>
       <?php
          $sorted_messages = array();
          if (mysqli_num_rows($emergency_messages_query) > 0) {
@@ -210,12 +211,27 @@ $conn->close();
          } else {
             echo "<p>No emergency messages found.</p>";
          }
+        echo '<div id="chat-messages"></div>';
       ?>
+      
    </div>
 </div>
 
    </div>
 
+<script>
+function fetchChatMessages() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'fetch_messages.php', true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            document.getElementById('chat-messages').innerHTML = xhr.responseText;
+        }
+    };
+    xhr.send();
+}
+setInterval(fetchChatMessages, 5000);
+</script>
 
    <script src="javascript/admin.js"></script>
 </body>
