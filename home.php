@@ -5,21 +5,22 @@ $user_id = $_SESSION['user_id'];
 
 if (!isset($user_id)) {
    header('location:login.php');
+   exit();
 };
 
 if (isset($_GET['logout'])) {
    unset($user_id);
    session_destroy();
    header('location:login.php');
+   exit();
 }
-
 
 $select = mysqli_query($conn, "SELECT email FROM `user_form` WHERE id = '$user_id'") or die('Query failed');
 if (mysqli_num_rows($select) > 0) {
    $fetch = mysqli_fetch_assoc($select);
    if ($fetch['email'] == "admin@gmail.com") {
-
       header('location:admin_interface.php');
+      exit();
    }
 }
 $admin_email = "admin@gmail.com";
@@ -60,21 +61,17 @@ date_default_timezone_set('Asia/Manila');
 
 $currentTime = new DateTime('now');
 
-
 if (isset($_POST['submit_message'])) {
    $message = mysqli_real_escape_string($conn, $_POST['emergency_message']);
    $unique_id = uniqid(); 
    $user_id = $_SESSION['user_id'];
    $timestamp = date('Y-m-d H:i:s');
 
-
    $insert_query = "INSERT INTO messages (user_id, unique_id, message, timestamp) VALUES ('$user_id', '$unique_id', '$message', '$timestamp')";
    if (mysqli_query($conn, $insert_query)) {
-       
-       echo "";
+ 
    } else {
-       
-       echo "";
+
    }
 }
 $emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY timestamp DESC") or die('Query failed');
@@ -91,6 +88,7 @@ $emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY
    <title>User</title>
    <link rel="stylesheet" href="css/home.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 </head>
 
@@ -164,14 +162,14 @@ $emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY
          </div>
       </div>
       <div id="tab3" class="tab-content">
-         <div class="emergency">
+      <div class="emergency">
             <h2>Emergency Report</h2>
-            <form action="#" method="post">
-            <input type="text" name="emergency_message" id="emergency_message" placeholder="Enter type of accident here.." required>
-            <button class="alert" name="submit_message"><img src="assets/icon/info.png" alt=""></button>
-         </form>
-             <h3 style="text-align: center;">For your information!</h3> 
-             <h4 style="text-align: center;margin-top:-.5rem;"> If you click that button, your personal information and current location will be sent to the MDRRMO.</h4>
+            <form action="#" method="post" id="emergency_form">
+               <input type="text" name="emergency_message" id="emergency_message" placeholder="Enter type of accident here.." required>
+               <button type="submit" class="alert" name="submit_message"><img src="assets/icon/info.png" alt=""></button>
+            </form>
+            <h3 style="text-align: center;">For your information!</h3>
+            <h4 style="text-align: center;margin-top:-.5rem;"> If you click that button, your personal information and current location will be sent to the MDRRMO.</h4>
          </div>
       </div>
       <div id="tab4" class="tab-content">
@@ -200,6 +198,24 @@ $emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY
    </div>
 
    <script src="javascript/home.js"></script>
+   <script>
+$(document).ready(function() {
+    function sendMessage(message) {
+        $.post('send_message.php', { message: message }, function(data) {
+            console.log(data); 
+        });
+    }
+
+    $('#emergency_form').submit(function(e) {
+        e.preventDefault();
+        var message = $('#emergency_message').val();
+        sendMessage(message);
+        $('#emergency_message').val(''); 
+    });
+
+    setInterval(getMessages, 5000);
+});
+</script>
 </body>
 
 </html>
