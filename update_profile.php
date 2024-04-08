@@ -26,6 +26,7 @@ if(isset($_POST['update_profile'])){
          $message[] = 'password updated successfully!';
       }
    }
+   
 
    $update_image = $_FILES['update_image']['name'];
    $update_image_size = $_FILES['update_image']['size'];
