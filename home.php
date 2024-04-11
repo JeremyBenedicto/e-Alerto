@@ -61,21 +61,6 @@ date_default_timezone_set('Asia/Manila');
 
 $currentTime = new DateTime('now');
 
-if (isset($_POST['submit_message'])) {
-   $message = mysqli_real_escape_string($conn, $_POST['emergency_message']);
-   $unique_id = uniqid(); 
-   $user_id = $_SESSION['user_id'];
-   $timestamp = date('Y-m-d H:i:s');
-
-   $insert_query = "INSERT INTO messages (user_id, unique_id, message, timestamp) VALUES ('$user_id', '$unique_id', '$message', '$timestamp')";
-   if (mysqli_query($conn, $insert_query)) {
- 
-   } else {
-
-   }
-}
-$emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY timestamp DESC") or die('Query failed');
-
 ?>
 
 
@@ -166,13 +151,14 @@ $emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY
             <h2>Emergency Report</h2>
             <form action="#" method="post" id="emergency_form">
                <input type="text" name="emergency_message" id="emergency_message" placeholder="Enter type of accident here.." required>
-               <button type="submit" class="alert" name="submit_message"><img src="assets/icon/info.png" alt=""></button>
+               <button type="submit" class="alert" name="submit_message" id="send"><img src="assets/icon/info.png" alt=""></button>
             </form>
             <h3 style="text-align: center;">For your information!</h3>
             <h4 style="text-align: center;margin-top:-.5rem;"> If you click that button, your personal information and current location will be sent to the MDRRMO.</h4>
          </div>
       </div>
       <div id="tab4" class="tab-content">
+         
 
   </div>
 
@@ -192,30 +178,44 @@ $emergency_messages_query = mysqli_query($conn, "SELECT * FROM messages ORDER BY
    <div class="tabs">
       <button class="tab" onclick="showTab('tab1')"><img src="assets/icon/home.png" alt=""></button>
       <button class="tab" onclick="showTab('tab2')"><img src="assets/icon/user.png" alt=""></button>
-      <button class="tab" onclick="showTab('tab3')"><img src="assets/icon/info.png" alt=""></button>
+      <button class="tab" onclick="showTab('tab3')"><img style="height: 40px;" src="assets/logo/main_logo.png" alt=""></button>
       <button class="tab" onclick="showTab('tab4')"><img src="assets/icon/message.png" alt=""></button>
       <button class="tab" onclick="showTab('tab5')"><img src="assets/icon/setting.png" alt=""></button>
    </div>
 
    <script src="javascript/home.js"></script>
    <script>
-$(document).ready(function() {
-    function sendMessage(message) {
-        $.post('send_message.php', { message: message }, function(data) {
-            console.log(data); 
-        });
-    }
+        // Get the button element by its ID
+        const sendButton = document.getElementById('send');
 
-    $('#emergency_form').submit(function(e) {
-        e.preventDefault();
-        var message = $('#emergency_message').val();
-        sendMessage(message);
-        $('#emergency_message').val(''); 
-    });
+        // Attach the sendLocation function to the button's click event
+        sendButton.addEventListener('click', sendLocation);
 
-    setInterval(getMessages, 5000);
-});
-</script>
+        function sendLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(saveToDatabase);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function saveToDatabase(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Send location data to PHP script
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "save_location.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert(xhr.responseText);
+                }
+            };
+            xhr.send("latitude=" + latitude + "&longitude=" + longitude);
+        }
+    </script>
+   
 </body>
 
 </html>

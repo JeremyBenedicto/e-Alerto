@@ -65,6 +65,7 @@ $conn->close();
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Interface</title>
    <link rel="stylesheet" href="css/admin.css">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
                         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
                         crossorigin="anonymous" 
@@ -76,7 +77,7 @@ $conn->close();
       <div class="main-body">
          <div class="upper">
             <div class="windy"><iframe width="650" height="300" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=15.496&lon=121.333" frameborder="0"></iframe></div>
-            <div class="weather-time"><img src="assets/eALERTO.png" alt="Image 2"></div>
+            <div class="weather-time"><img style="height: 300px;" src="assets/bar_graph.png" alt="Image 2"></div>
          </div>
          <div class="lower">
             <div class="graph"><a class="weatherwidget-io" href="https://forecast7.com/en/15d52121d31/gabaldon/" data-label_1="GABALDON" data-label_2="WEATHER" data-theme="original" >GABALDON WEATHER</a>
@@ -102,7 +103,7 @@ $conn->close();
       <div class="left-body">
          <div class="logo">
             <div class="logo1">
-            <img style="height: 150px;border-radius:100px;" src="assets/logo/main_logo_1.JPG" alt="eALERTO logo">
+            <img style="height: 150px;border-radius:100px;" src="assets/logo/main_logo.png" alt="eALERTO logo">
             </div>
          </div>
          <div class="right-nav">
@@ -189,31 +190,9 @@ $conn->close();
     <div class="emergency-section">
    <div class="message-list">
    <div id="chat-messages"></div>
-      <?php
-         $sorted_messages = array();
-         if (mysqli_num_rows($emergency_messages_query) > 0) {
-            while ($row = mysqli_fetch_assoc($emergency_messages_query)) {
-               $sorted_messages[] = $row;
-            }
-            usort($sorted_messages, function($a, $b) {
-               return strtotime($b['timestamp']) - strtotime($a['timestamp']);
-            });
-            foreach ($sorted_messages as $message) {
-               echo "<div class='message-item'>";
-               echo "<img src='uploaded_img/" . $message['image'] . "' alt='Profile Image'>";
-               echo "<div class='des'>";
-               echo "<p><strong>" . $message['firstname'] . " " . $message['lastname'] . "</strong></p>";
-               echo "<p><strong>Message:</strong> " . $message['message'] . "</p>";
-               echo "<p><strong>Timestamp:</strong> " . $message['timestamp'] . "</p>";
-               echo "</div>";
-               echo "</div>";
-            }
-         } else {
-            echo "<p>No emergency messages found.</p>";
-         }
-        echo '<div id="chat-messages"></div>';
-      ?>
-      
+   <h1>Receiver Interface</h1>
+    <div id="map"></div>
+   <!-- message div here.... -->
    </div>
 </div>
 
@@ -230,8 +209,40 @@ function fetchChatMessages() {
     };
     xhr.send();
 }
-setInterval(fetchChatMessages, 5000);
+setInterval(fetchChatMessages, 1000);
 </script>
+
+<script src="https://unpkg.com/leaflet"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            initMap();
+        });
+
+        function initMap() {
+            // Retrieve sender's location asynchronously
+            fetch('get_location.php')
+                .then(response => response.json())
+                .then(location => {
+                    showMap(location.latitude, location.longitude);
+                })
+                .catch(error => console.error('Error retrieving location:', error));
+        }
+
+        function showMap(latitude, longitude) {
+            // Initialize map
+            const map = L.map('map').setView([latitude, longitude], 13);
+
+            // Add tile layer (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add marker to the map
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup('Sender\'s Location')
+                .openPopup();
+        }
+    </script>
 
    <script src="javascript/admin.js"></script>
 </body>

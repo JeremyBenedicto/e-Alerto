@@ -34,3 +34,21 @@ function showSlides() {
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
+
+$(document).ready(function() {
+  function sendMessage(message) {
+      $.post('send_message.php', { message: message }, function(data) {
+          console.log(data); 
+      });
+  }
+
+  $('#emergency_form').submit(function(e) {
+      e.preventDefault();
+      var message = $('#emergency_message').val();
+      sendMessage(message);
+      $('#emergency_message').val(''); 
+  });
+
+  setInterval(getMessages, 1000);
+});
+

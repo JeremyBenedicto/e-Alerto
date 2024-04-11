@@ -22,6 +22,8 @@ $sorted_messages = array();
                echo "<p><strong>" . $message['firstname'] . " " . $message['lastname'] . "</strong></p>";
                echo "<p><strong>Message:</strong> " . $message['message'] . "</p>";
                echo "<p><strong>Timestamp:</strong> " . $message['timestamp'] . "</p>";
+               echo "<a href='login.php'>Response</a>";
+               echo "<div id='map'></div>";
                echo "</div>";
                echo "</div>";
             }

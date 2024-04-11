@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
             }
          }
          ?>
-         <img style="height: 180px; margin:0 2rem 2rem 2rem;" src="assets/eALERTO.png" alt="">
+         <img style="height: 180px; margin:0 2rem 2rem 2rem;" src="assets/logo/main_logo.png" alt="">
          <input type="email" name="email" placeholder="enter email" class="box" required>
          <input type="password" name="password" placeholder="enter password" class="box" required>
          <div class="input-group">
