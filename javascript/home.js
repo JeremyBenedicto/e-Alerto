@@ -49,6 +49,6 @@ $(document).ready(function() {
       $('#emergency_message').val(''); 
   });
 
-  setInterval(getMessages, 1000);
+  setInterval(getMessages, 3000);
 });
 

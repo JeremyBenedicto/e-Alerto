@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2024 at 04:35 PM
+-- Generation Time: Apr 16, 2024 at 06:18 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -52,6 +52,33 @@ INSERT INTO `accident_record` (`accident_id`, `name`, `age`, `address`, `locatio
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `injury_form`
+--
+
+CREATE TABLE `injury_form` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `sex` varchar(10) DEFAULT NULL,
+  `civil_status` varchar(20) DEFAULT NULL,
+  `NO1` varchar(255) DEFAULT NULL,
+  `PO1` varchar(255) DEFAULT NULL,
+  `TO1` varchar(255) DEFAULT NULL,
+  `DO1` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `bp` varchar(20) DEFAULT NULL,
+  `nameofcaller` varchar(255) DEFAULT NULL,
+  `numofcaller` varchar(20) DEFAULT NULL,
+  `wound_type` text DEFAULT NULL,
+  `fracture_type` varchar(20) DEFAULT NULL,
+  `emergency_types` text DEFAULT NULL,
+  `others_text` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `messages`
 --
 
@@ -68,11 +95,22 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `user_id`, `unique_id`, `message`, `timestamp`) VALUES
-(1, 15, 0, 'dcvdfv', '2024-04-11 14:22:36'),
-(2, 18, 0, 'scscsa dcsdc', '2024-04-11 14:31:47'),
-(3, 18, 0, 'may sunog', '2024-04-11 14:32:20'),
-(4, 18, 0, 'may saksakan', '2024-04-11 14:33:19'),
-(5, 18, 0, 'may tikbalang', '2024-04-11 14:34:20');
+(1, 15, 0, 'daddddd', '2024-04-11 16:08:36'),
+(2, 21, 0, 'nalason', '2024-04-12 12:59:37'),
+(3, 21, 0, 'natusok sa mata', '2024-04-12 13:10:54'),
+(4, 21, 0, 'haluu', '2024-04-12 13:18:04'),
+(5, 21, 0, 'hello', '2024-04-12 13:19:17'),
+(6, 21, 0, 'geell', '2024-04-12 13:19:47'),
+(7, 21, 0, 'dfgfdgf', '2024-04-12 13:20:23'),
+(8, 21, 0, 'hello', '2024-04-12 13:20:43'),
+(9, 21, 0, 'nalason', '2024-04-12 15:19:23'),
+(10, 21, 0, 'helloooo', '2024-04-12 15:31:16'),
+(11, 21, 0, 'nabato', '2024-04-12 15:31:27'),
+(12, 21, 0, 'hess', '2024-04-12 15:31:32'),
+(13, 21, 0, 'nabulunan sa patata', '2024-04-12 15:33:48'),
+(14, 21, 0, 'nagdugo ang ilong', '2024-04-12 15:45:33'),
+(15, 21, 0, 'nalunod', '2024-04-12 15:47:04'),
+(16, 21, 0, 'nasaksak', '2024-04-12 15:49:30');
 
 -- --------------------------------------------------------
 
@@ -91,10 +129,12 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`photo_id`, `photo_path`, `photo_type`) VALUES
-(54, 'uploads/final 1.jpg', 'image/jpeg'),
-(55, 'uploads/final 2.jpg', 'image/jpeg'),
-(56, 'uploads/final 3.jpg', 'image/jpeg'),
-(57, 'uploads/final 4.jpg', 'image/jpeg');
+(58, 'uploads/1.png', 'image/png'),
+(59, 'uploads/2.png', 'image/png'),
+(60, 'uploads/4.png', 'image/png'),
+(61, 'uploads/3.png', 'image/png'),
+(62, 'uploads/5.png', 'image/png'),
+(63, 'uploads/1.png', 'image/png');
 
 -- --------------------------------------------------------
 
@@ -130,7 +170,8 @@ INSERT INTO `user_form` (`id`, `unique_id`, `firstname`, `email`, `cpnum`, `pass
 (17, 125385, 'Sir Dane', 'Dane@gmail.com', '0', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'Irang', 'Sisor', 18, 'South', 'male', 'Offline Now'),
 (18, 731219, 'Rafael', 'johnrafaellee@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'ff704ac8d94d61ac042a9a579399332e.png', 'Benedicto', 'Lee', 22, 'Tagumpay', 'male', 'Active Now'),
 (19, 756548, 'a', 'a@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'appLogo.png', 'a', 'a', 12, 'Tagumpay', 'female', 'Active Now'),
-(20, 305162, 'maru', 'webpage651@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'secret', 'ayaw', 99, 'Tagumpay', 'male', 'Active Now');
+(20, 305162, 'maru', 'webpage651@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'secret', 'ayaw', 99, 'Tagumpay', 'male', 'Active Now'),
+(21, 468999, 'Jeremy', 'jeremy@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'download (1).jpg', 'Cando', 'Benedicto', 22, '96 Everlasting', 'male', 'Active Now');
 
 -- --------------------------------------------------------
 
@@ -151,24 +192,19 @@ CREATE TABLE `user_locations` (
 --
 
 INSERT INTO `user_locations` (`id`, `user_id`, `latitude`, `longitude`, `timestamp`) VALUES
-(7, 0, '15.484245500000002', '121.31221', '2024-04-11 14:13:07'),
-(8, 0, '15.484245500000002', '121.31221', '2024-04-11 14:17:20'),
-(9, 0, '15.484237875000002', '121.31220850000001', '2024-04-11 14:18:04'),
-(10, 0, '15.484237875000002', '121.31220850000001', '2024-04-11 14:19:09'),
-(11, 0, '15.484237875000002', '121.31220850000001', '2024-04-11 14:19:46'),
-(12, 0, '15.484237875000002', '121.31220850000001', '2024-04-11 14:19:49'),
-(13, 0, '15.484237875000002', '121.31220850000001', '2024-04-11 14:20:39'),
-(14, 0, '15.484237875000002', '121.31220850000001', '2024-04-11 14:24:16'),
-(15, 0, '15.484033', '121.3122115', '2024-04-11 14:25:34'),
-(16, 0, '15.484033', '121.3122115', '2024-04-11 14:26:36'),
-(17, 0, '15.484033', '121.3122115', '2024-04-11 14:28:48'),
-(18, 0, '15.484033', '121.3122115', '2024-04-11 14:29:05'),
-(19, 0, '15.484033', '121.3122115', '2024-04-11 14:29:42'),
-(20, 0, '15.484033', '121.3122115', '2024-04-11 14:30:12'),
-(21, 0, '15.484033', '121.3122115', '2024-04-11 14:31:47'),
-(22, 0, '15.484033', '121.3122115', '2024-04-11 14:32:20'),
-(23, 0, '15.484033', '121.3122115', '2024-04-11 14:33:20'),
-(24, 18, '15.4840292', '121.3122161', '2024-04-11 14:34:20');
+(1, 15, '15.4840296', '121.3122156', '2024-04-11 16:08:40'),
+(2, 21, '15.8531584', '120.9204736', '2024-04-12 12:59:37'),
+(3, 21, '15.449727', '121.343456', '2024-04-12 13:10:54'),
+(4, 21, '15.4497236', '121.343457', '2024-04-12 13:20:23'),
+(5, 21, '15.4497236', '121.343457', '2024-04-12 13:20:43'),
+(6, 21, '15.449719', '121.3434625', '2024-04-12 15:19:23'),
+(7, 21, '15.4497281', '121.3434623', '2024-04-12 15:31:16'),
+(8, 21, '15.4497281', '121.3434623', '2024-04-12 15:31:27'),
+(9, 21, '15.4497281', '121.3434623', '2024-04-12 15:31:32'),
+(10, 21, '15.4497281', '121.3434623', '2024-04-12 15:33:48'),
+(11, 21, '15.449719', '121.3434625', '2024-04-12 15:45:33'),
+(12, 21, '15.449719', '121.3434625', '2024-04-12 15:47:04'),
+(13, 21, '15.449719', '121.3434625', '2024-04-12 15:49:30');
 
 --
 -- Indexes for dumped tables
@@ -179,6 +215,12 @@ INSERT INTO `user_locations` (`id`, `user_id`, `latitude`, `longitude`, `timesta
 --
 ALTER TABLE `accident_record`
   ADD PRIMARY KEY (`accident_id`);
+
+--
+-- Indexes for table `injury_form`
+--
+ALTER TABLE `injury_form`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `messages`
@@ -215,28 +257,34 @@ ALTER TABLE `accident_record`
   MODIFY `accident_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `injury_form`
+--
+ALTER TABLE `injury_form`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `photo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `photo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `user_form`
 --
 ALTER TABLE `user_form`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user_locations`
 --
 ALTER TABLE `user_locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

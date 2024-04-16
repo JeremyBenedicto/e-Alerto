@@ -3,56 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notification Button</title>
+<title>Simple Drawing App</title>
 <style>
-    /* Style the button */
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+}
 
-    /* Style the notification */
-    .notification {
-        display: none;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        padding: 16px;
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 300px;
-        z-index: 1;
-    }
+canvas {
+  position: relative;
+  display: block;
+  background-color: #fff;
+  cursor: crosshair;
+}
+
+#buttons {
+  margin-top: 20px;
+}
+
+button {
+  margin: 5px;
+}
+
+#image {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  pointer-events: none; /* Make the image not interfere with drawing */
+}
 </style>
 </head>
 <body>
-
-<!-- Button to trigger the notification -->
-<form method="post">
-    <button class="button" type="submit" name="notify">Click Me</button>
-</form>
-
-<!-- The notification -->
-<div id="notification" class="notification">
-    <span id="notificationText"><?php echo isset($notificationMessage) ? $notificationMessage : ''; ?></span>
+<div id="buttons">
+  <button id="undoBtn">Undo</button>
+  <button id="redoBtn">Redo</button>
 </div>
-
-<?php
-// Check if the button is clicked
-if (isset($_POST['notify'])) {
-    // Display the notification
-    $notificationMessage = "This is a notification!";
-}
-?>
-
+<canvas id="canvas"></canvas>
+<img id="image" src="assets/" alt="Your Image">
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const undoBtn = document.getElementById("undoBtn");
+    const redoBtn = document.getElementById("redoBtn");
+    
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let history = [];
+    let redoStack = [];
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    ctx.lineWidth = 3;
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#000";
+    
+    function startDrawing(e) {
+        isDrawing = true;
+        draw(e);
+    }
+    
+    function stopDrawing() {
+        isDrawing = false;
+        ctx.beginPath();
+        saveState();
+    }
+    
+    function draw(e) {
+        if (!isDrawing) return;
+        
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(e.clientX, e.clientY);
+    }
+    
+    function undo() {
+        if (history.length > 0) {
+            redoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            ctx.putImageData(history.pop(), 0, 0);
+        }
+    }
+    
+    function redo() {
+        if (redoStack.length > 0) {
+            history.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+            ctx.putImageData(redoStack.pop(), 0, 0);
+        }
+    }
+    
+    function saveState() {
+        history.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+        redoStack = [];
+    }
+    
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseout", stopDrawing);
+    undoBtn.addEventListener("click", undo);
+    redoBtn.addEventListener("click", redo);
+});
+</script>
 </body>
 </html>

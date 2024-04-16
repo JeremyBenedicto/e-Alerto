@@ -65,7 +65,14 @@ $conn->close();
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Interface</title>
    <link rel="stylesheet" href="css/admin.css">
-   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+   <head>
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Include Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
                         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
                         crossorigin="anonymous" 
@@ -118,7 +125,7 @@ $conn->close();
                   <button id="popperBtn4" class="nav2"><img src="assets/icon/edit.png" alt=""></button>
                   <div id="popperContent4" class="popper-content">
                   <div class="admin-actions">
-                     <a href="record_accident.php" class="btn" id="red">Add Record</a>
+                     <a href="injury_report_form.php" class="btn" id="red">Add Record</a>
                      <a href="view_records.php" class="btn" id="out">View Record</a>
                   </div>
                </div>
@@ -190,15 +197,13 @@ $conn->close();
     <div class="emergency-section">
    <div class="message-list">
    <div id="chat-messages"></div>
-   <h1>Receiver Interface</h1>
-    <div id="map"></div>
    <!-- message div here.... -->
    </div>
 </div>
 
    </div>
 
-<script>
+   <script>
 function fetchChatMessages() {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'fetch_messages.php', true);
@@ -209,40 +214,11 @@ function fetchChatMessages() {
     };
     xhr.send();
 }
-setInterval(fetchChatMessages, 1000);
+setTimeout(fetchChatMessages, 3000);
 </script>
 
-<script src="https://unpkg.com/leaflet"></script>
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            initMap();
-        });
 
-        function initMap() {
-            // Retrieve sender's location asynchronously
-            fetch('get_location.php')
-                .then(response => response.json())
-                .then(location => {
-                    showMap(location.latitude, location.longitude);
-                })
-                .catch(error => console.error('Error retrieving location:', error));
-        }
 
-        function showMap(latitude, longitude) {
-            // Initialize map
-            const map = L.map('map').setView([latitude, longitude], 13);
-
-            // Add tile layer (OpenStreetMap)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            // Add marker to the map
-            L.marker([latitude, longitude]).addTo(map)
-                .bindPopup('Sender\'s Location')
-                .openPopup();
-        }
-    </script>
 
    <script src="javascript/admin.js"></script>
 </body>

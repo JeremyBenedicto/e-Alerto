@@ -1,5 +1,5 @@
 <?php
-include 'php/config.php';
+/*include 'php/config.php';
 
 $html = '';
 $emergency_messages_query = mysqli_query($conn, "SELECT messages.*, user_form.firstname, user_form.lastname, user_form.image
@@ -15,7 +15,6 @@ if (mysqli_num_rows($emergency_messages_query) > 0) {
         $html .= "<p><strong>" . $row['firstname'] . " " . $row['lastname'] . "</strong></p>";
         $html .= "<p><strong>Message:</strong> " . $row['message'] . "</p>";
         $html .= "<p><strong>Timestamp:</strong> " . $row['timestamp'] . "</p>";
-        $html .= "<a href='login.php'>Response</a>";
         $html .= "</div>";
         $html .= "</div>";
     }

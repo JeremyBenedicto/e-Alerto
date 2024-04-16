@@ -547,9 +547,11 @@ button {
   box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
   justify-content: center;
   align-self: center;
-  flex-direction: row;
+  flex-direction: column;
 }
-
+.message-item .d{
+  display: flex;
+}
 
 .message-item p {
   margin: 0;
@@ -558,7 +560,6 @@ button {
 .message-item img {
   width: 80px;
   height: 80px;
-  border: solid black 2px;
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -579,5 +580,4 @@ box-shadow: inset 5px 5px 10px #d7d7d7,
 
 #map {
   height: 400px;
-  width: 100%;
 }
