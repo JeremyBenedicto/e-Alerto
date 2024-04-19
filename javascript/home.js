@@ -1,17 +1,17 @@
 function showTab(tabId) {
     // Hide all tab contents
     var tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(function(tabContent) {
-      tabContent.classList.remove('active');
+    tabContents.forEach(function (tabContent) {
+        tabContent.classList.remove('active');
     });
-  
+
     // Show the selected tab content
     var selectedTabContent = document.getElementById(tabId);
     selectedTabContent.classList.add('active');
-  }
-  
+}
 
-  function toggleDarkMode() {
+
+function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle('dark-mode');
 }
@@ -23,11 +23,11 @@ function showSlides() {
     var i;
     var slides = document.getElementsByClassName("mySlides");
     for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
+        slides[i].style.display = "none";
     }
     slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}    
-    slides[slideIndex-1].style.display = "block";  
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
     setTimeout(showSlides, 5000);
 }
 
@@ -35,20 +35,23 @@ function plusSlides(n) {
     showSlides(slideIndex += n);
 }
 
-$(document).ready(function() {
-  function sendMessage(message) {
-      $.post('send_message.php', { message: message }, function(data) {
-          console.log(data); 
-      });
-  }
+$(document).ready(function () {
+    function sendMessage(message) {
+        $.post('send_message.php', { message: message }, function (data) {
+            console.log(data);
+        });
+    }
 
-  $('#emergency_form').submit(function(e) {
-      e.preventDefault();
-      var message = $('#emergency_message').val();
-      sendMessage(message);
-      $('#emergency_message').val(''); 
-  });
+    $('#emergency_form').submit(function (e) {
+        e.preventDefault();
+        var message = $('#emergency_message').val();
+        sendMessage(message);
+        $('#emergency_message').val('');
+    });
 
-  setInterval(getMessages, 3000);
+    setInterval(getMessages, 3000);
 });
+
+
+// Get the button element by its ID
 

@@ -214,7 +214,7 @@ function fetchChatMessages() {
     };
     xhr.send();
 }
-setTimeout(fetchChatMessages, 3000);
+setTimeout(fetchChatMessages, 2000);
 </script>
 
 

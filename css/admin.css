@@ -563,19 +563,26 @@ button {
   border-radius: 50%;
   margin-right: 10px;
 }
+.d{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
 
-.message-item a{
+.is button{
   margin: 10px 0;
   text-decoration: none;
-  color: #000000;
+  color: #007902;
   padding: 5px;
-  border-radius: 47px;
-background: #e0e0e0;
-box-shadow: inset 5px 5px 10px #d7d7d7,
-            inset -5px -5px 10px #e9e9e9;
+  margin-left: 10px;
+  border-radius: 21px;
 }
-.message-item a:hover{
-  color: #5F5E5D;
+.is button i{
+  font-size: 40px;
+}
+.message-item button:hover{
+  color: #454545;
 }
 
 #map {

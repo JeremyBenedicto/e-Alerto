@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 16, 2024 at 06:18 AM
+-- Generation Time: Apr 19, 2024 at 02:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -52,6 +52,27 @@ INSERT INTO `accident_record` (`accident_id`, `name`, `age`, `address`, `locatio
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin_response`
+--
+
+CREATE TABLE `admin_response` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin_response`
+--
+
+INSERT INTO `admin_response` (`id`, `user_id`, `message`, `timestamp`) VALUES
+(1, 15, 'Thank you', '2024-04-18 14:53:51'),
+(2, 21, 'Thank you for your valuable feedback. We appreciate your report and will take the necessary actions.', '2024-04-18 14:54:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `injury_form`
 --
 
@@ -76,6 +97,13 @@ CREATE TABLE `injury_form` (
   `others_text` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `injury_form`
+--
+
+INSERT INTO `injury_form` (`id`, `name`, `age`, `sex`, `civil_status`, `NO1`, `PO1`, `TO1`, `DO1`, `date`, `address`, `bp`, `nameofcaller`, `numofcaller`, `wound_type`, `fracture_type`, `emergency_types`, `others_text`) VALUES
+(1, 'jeremy cando benedicto', 23, 'male', 'married', '23', '23', '23', '23', '2024-04-16', 'Tagumpay', '187', '77777', 'marites', 'laceration', 'closed', 'others_checkbox', 'owera');
+
 -- --------------------------------------------------------
 
 --
@@ -95,22 +123,9 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `user_id`, `unique_id`, `message`, `timestamp`) VALUES
-(1, 15, 0, 'daddddd', '2024-04-11 16:08:36'),
-(2, 21, 0, 'nalason', '2024-04-12 12:59:37'),
-(3, 21, 0, 'natusok sa mata', '2024-04-12 13:10:54'),
-(4, 21, 0, 'haluu', '2024-04-12 13:18:04'),
-(5, 21, 0, 'hello', '2024-04-12 13:19:17'),
-(6, 21, 0, 'geell', '2024-04-12 13:19:47'),
-(7, 21, 0, 'dfgfdgf', '2024-04-12 13:20:23'),
-(8, 21, 0, 'hello', '2024-04-12 13:20:43'),
-(9, 21, 0, 'nalason', '2024-04-12 15:19:23'),
-(10, 21, 0, 'helloooo', '2024-04-12 15:31:16'),
-(11, 21, 0, 'nabato', '2024-04-12 15:31:27'),
-(12, 21, 0, 'hess', '2024-04-12 15:31:32'),
-(13, 21, 0, 'nabulunan sa patata', '2024-04-12 15:33:48'),
-(14, 21, 0, 'nagdugo ang ilong', '2024-04-12 15:45:33'),
-(15, 21, 0, 'nalunod', '2024-04-12 15:47:04'),
-(16, 21, 0, 'nasaksak', '2024-04-12 15:49:30');
+(1, 21, 0, 'masakit ipit', '2024-04-18 12:37:29'),
+(2, 21, 0, 'hello', '2024-04-18 13:06:10'),
+(3, 15, 0, 'kumain', '2024-04-18 14:11:02');
 
 -- --------------------------------------------------------
 
@@ -133,7 +148,6 @@ INSERT INTO `photos` (`photo_id`, `photo_path`, `photo_type`) VALUES
 (59, 'uploads/2.png', 'image/png'),
 (60, 'uploads/4.png', 'image/png'),
 (61, 'uploads/3.png', 'image/png'),
-(62, 'uploads/5.png', 'image/png'),
 (63, 'uploads/1.png', 'image/png');
 
 -- --------------------------------------------------------
@@ -192,19 +206,9 @@ CREATE TABLE `user_locations` (
 --
 
 INSERT INTO `user_locations` (`id`, `user_id`, `latitude`, `longitude`, `timestamp`) VALUES
-(1, 15, '15.4840296', '121.3122156', '2024-04-11 16:08:40'),
-(2, 21, '15.8531584', '120.9204736', '2024-04-12 12:59:37'),
-(3, 21, '15.449727', '121.343456', '2024-04-12 13:10:54'),
-(4, 21, '15.4497236', '121.343457', '2024-04-12 13:20:23'),
-(5, 21, '15.4497236', '121.343457', '2024-04-12 13:20:43'),
-(6, 21, '15.449719', '121.3434625', '2024-04-12 15:19:23'),
-(7, 21, '15.4497281', '121.3434623', '2024-04-12 15:31:16'),
-(8, 21, '15.4497281', '121.3434623', '2024-04-12 15:31:27'),
-(9, 21, '15.4497281', '121.3434623', '2024-04-12 15:31:32'),
-(10, 21, '15.4497281', '121.3434623', '2024-04-12 15:33:48'),
-(11, 21, '15.449719', '121.3434625', '2024-04-12 15:45:33'),
-(12, 21, '15.449719', '121.3434625', '2024-04-12 15:47:04'),
-(13, 21, '15.449719', '121.3434625', '2024-04-12 15:49:30');
+(1, 21, '15.484189916666669', '121.31221033333335', '2024-04-18 12:37:34'),
+(2, 21, '15.484209100000001', '121.3122096', '2024-04-18 13:06:33'),
+(3, 15, '15.484176214285716', '121.31221085714287', '2024-04-18 14:11:08');
 
 --
 -- Indexes for dumped tables
@@ -215,6 +219,13 @@ INSERT INTO `user_locations` (`id`, `user_id`, `latitude`, `longitude`, `timesta
 --
 ALTER TABLE `accident_record`
   ADD PRIMARY KEY (`accident_id`);
+
+--
+-- Indexes for table `admin_response`
+--
+ALTER TABLE `admin_response`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `injury_form`
@@ -257,16 +268,22 @@ ALTER TABLE `accident_record`
   MODIFY `accident_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `admin_response`
+--
+ALTER TABLE `admin_response`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `injury_form`
 --
 ALTER TABLE `injury_form`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `photos`
@@ -284,7 +301,17 @@ ALTER TABLE `user_form`
 -- AUTO_INCREMENT for table `user_locations`
 --
 ALTER TABLE `user_locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `admin_response`
+--
+ALTER TABLE `admin_response`
+  ADD CONSTRAINT `admin_response_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_form` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

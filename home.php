@@ -184,6 +184,36 @@ $currentTime = new DateTime('now');
    </div>
 
    <script src="javascript/home.js"></script>
+   <script>
+      const sendButton = document.getElementById('send');
+
+// Attach the sendLocation function to the button's click event
+sendButton.addEventListener('click', sendLocation);
+
+function sendLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(saveToDatabase);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function saveToDatabase(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    // Send location data to PHP script
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "save_location.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            alert(xhr.responseText);
+        }
+    };
+    xhr.send("latitude=" + latitude + "&longitude=" + longitude);
+}
+   </script>
    
 </body>
 

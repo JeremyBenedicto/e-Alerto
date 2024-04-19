@@ -43,6 +43,11 @@ button {
 <div id="buttons">
   <button id="undoBtn">Undo</button>
   <button id="redoBtn">Redo</button>
+
+
+
+
+  
 </div>
 <canvas id="canvas"></canvas>
 <img id="image" src="assets/" alt="Your Image">
