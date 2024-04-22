@@ -160,8 +160,8 @@ $currentTime = new DateTime('now');
       </div>
       <div id="tab4" class="tab-content">
          <div class="content1">
-         <div class="set">
-               <h2 style="text-align: start;color:black;padding:1rem 1rem 0 1rem;">Message</h2>
+         <div class="set4">
+               <h2 style="text-align: start;color:black;padding:1rem 1rem 0 1rem;">Inbox</h2>
             </div>
     <div class="content3">
         <?php
