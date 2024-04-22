@@ -34,9 +34,9 @@ $result = $conn->query($sql);
 
 $photos = array();
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $photos[] = $row['photo_path'];
-    }
+   while ($row = $result->fetch_assoc()) {
+      $photos[] = $row['photo_path'];
+   }
 }
 
 $apiKey = "95c6c917d1860ea97c9b3c8837ee3fd9";
@@ -82,38 +82,39 @@ $currentTime = new DateTime('now');
       <div id="tab1" class="tab-content active">
          <div class="dashboard">
             <div class="upper">
-            <div class="windy">
-               <iframe width="100%" height="100%" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=15.496&lon=121.333" frameborder="0"></iframe>
+               <div class="windy">
+                  <iframe width="100%" height="100%" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=15.496&lon=121.333" frameborder="0"></iframe>
+               </div>
+               <div class="weather">
+                  <h2><?php echo $data->name; ?> Weather Forecast</h2>
+                  <img src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png" class="weather-icon" alt="Weather Icon">
+                  <div class="weather-description"><?php echo ucwords($data->weather[0]->description); ?></div>
+                  <div class="temperature"><?php echo round($data->main->temp); ?>&deg;C</div>
+                  <div class="additional-info">
+                     <div class="info-item">
+                        <span class="info-label">Humidity:</span>
+                        <span class="info-value"><?php echo $data->main->humidity; ?>%</span>
+                     </div>
+                     <div class="info-item">
+                        <span class="info-label">Wind:</span>
+                        <span class="info-value"><?php echo $data->wind->speed; ?> km/h</span>
+                     </div>
+                  </div>
+                  <div class="update-time">
+                     Last Updated: <?php echo $currentTime->format('jS F, Y - g:i a'); ?>
+                  </div>
+               </div>
             </div>
-            <div class="weather">
-            <h2><?php echo $data->name; ?> Weather Forecast</h2>
-    <img src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png" class="weather-icon" alt="Weather Icon">
-    <div class="weather-description"><?php echo ucwords($data->weather[0]->description); ?></div>
-    <div class="temperature"><?php echo round($data->main->temp); ?>&deg;C</div>
-    <div class="additional-info">
-        <div class="info-item">
-            <span class="info-label">Humidity:</span>
-            <span class="info-value"><?php echo $data->main->humidity; ?>%</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Wind:</span>
-            <span class="info-value"><?php echo $data->wind->speed; ?> km/h</span>
-        </div>
-    </div>
-    <div class="update-time">
-        Last Updated: <?php echo $currentTime->format('jS F, Y - g:i a'); ?>
-    </div>   </div>
-    </div>
             <div class="news">
-            <div class="slideshow-container">
-    <?php foreach ($photos as $photo): ?>
-        <div class="mySlides fade">
-            <img src="<?php echo $photo; ?>" style="width:100%; height:12rem">
-        </div>
-    <?php endforeach; ?>
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-</div>
+               <div class="slideshow-container">
+                  <?php foreach ($photos as $photo) : ?>
+                     <div class="mySlides fade">
+                        <img src="<?php echo $photo; ?>" style="width:100%; height:12rem">
+                     </div>
+                  <?php endforeach; ?>
+                  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+               </div>
             </div>
          </div>
       </div>
@@ -143,11 +144,11 @@ $currentTime = new DateTime('now');
             <div class="pInfo"><i class="fa-solid fa-user"></i><?php echo $fetch['age']; ?></div>
             <div class="pInfo"><i class="fa-solid fa-person-half-dress"></i><?php echo $fetch['gender']; ?></div>
             <div id="last"><br><br></div>
-            
+
          </div>
       </div>
       <div id="tab3" class="tab-content">
-      <div class="emergency">
+         <div class="emergency">
             <h2>Emergency Report</h2>
             <form action="#" method="post" id="emergency_form">
                <input type="text" name="emergency_message" id="emergency_message" placeholder="Enter type of accident here.." required>
@@ -158,9 +159,41 @@ $currentTime = new DateTime('now');
          </div>
       </div>
       <div id="tab4" class="tab-content">
-         
+         <div class="content1">
+         <div class="set">
+               <h2 style="text-align: start;color:black;padding:1rem 1rem 0 1rem;">Message</h2>
+            </div>
+    <div class="content3">
+        <?php
+            $info = mysqli_query($conn, "SELECT image, firstname, lastname FROM user_form WHERE id = '7'");
+            if (mysqli_num_rows($info) > 0) {
+                while ($response_row = mysqli_fetch_assoc($info)) {
+                  echo "<div class='profil'>";
+                  echo "<img src='uploaded_img/" . $response_row['image'] . "' alt='Profile Image'>";
+                  echo "<p><strong>" . $response_row['firstname'] . " " . $response_row['lastname'] . "</strong></p>";
+                  echo "</div>";
+                }
+            } else {
+                echo "";
+            }
+            ?>
+        <div class="response-messages">
+            <?php
+            $response_query = mysqli_query($conn, "SELECT message, timestamp FROM admin_response WHERE user_id = '$user_id'");
+            if (mysqli_num_rows($response_query) > 0) {
+                while ($response_row = mysqli_fetch_assoc($response_query)) {
+                    echo "<p>" . $response_row['message'] . "</p>";
+                    echo "<p>" . $response_row['timestamp'] . "</p>";
+                }
+            } else {
+                echo "<p>No response messages yet.</p>";
+            }
+            ?>
+        </div>
+    </div>
+    </div>
+</div>
 
-  </div>
 
       <div id="tab5" class="tab-content">
 
@@ -187,34 +220,34 @@ $currentTime = new DateTime('now');
    <script>
       const sendButton = document.getElementById('send');
 
-// Attach the sendLocation function to the button's click event
-sendButton.addEventListener('click', sendLocation);
+      // Attach the sendLocation function to the button's click event
+      sendButton.addEventListener('click', sendLocation);
 
-function sendLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(saveToDatabase);
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-}
+      function sendLocation() {
+         if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(saveToDatabase);
+         } else {
+            alert("Geolocation is not supported by this browser.");
+         }
+      }
 
-function saveToDatabase(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
+      function saveToDatabase(position) {
+         const latitude = position.coords.latitude;
+         const longitude = position.coords.longitude;
 
-    // Send location data to PHP script
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "save_location.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            alert(xhr.responseText);
-        }
-    };
-    xhr.send("latitude=" + latitude + "&longitude=" + longitude);
-}
+         // Send location data to PHP script
+         const xhr = new XMLHttpRequest();
+         xhr.open("POST", "save_location.php", true);
+         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+         xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+               alert(xhr.responseText);
+            }
+         };
+         xhr.send("latitude=" + latitude + "&longitude=" + longitude);
+      }
    </script>
-   
+
 </body>
 
 </html>

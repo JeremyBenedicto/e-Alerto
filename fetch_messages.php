@@ -1,13 +1,11 @@
 <?php
 include 'php/config.php';
 
-// Fetch messages with user details
 $messages_query = mysqli_query($conn, "SELECT messages.*, user_form.firstname, user_form.lastname, user_form.image
 FROM messages 
 INNER JOIN user_form ON messages.user_id = user_form.id 
 ORDER BY messages.timestamp DESC") or die('Message query failed');
 
-// Fetch user locations
 $locations_query = mysqli_query($conn, "SELECT user_id, latitude, longitude FROM user_locations") or die('Location query failed');
 $locations = array();
 while ($location_row = mysqli_fetch_assoc($locations_query)) {
@@ -17,7 +15,6 @@ while ($location_row = mysqli_fetch_assoc($locations_query)) {
     );
 }
 
-// Check if messages exist
 if (mysqli_num_rows($messages_query) > 0) {
     while ($row = mysqli_fetch_assoc($messages_query)) {
         $sorted_messages[] = $row;
@@ -25,6 +22,7 @@ if (mysqli_num_rows($messages_query) > 0) {
     usort($sorted_messages, function ($a, $b) {
         return strtotime($b['timestamp']) - strtotime($a['timestamp']);
     });
+
     foreach ($sorted_messages as $message) {
         echo "<div class='message-item'>";
         echo "<div class='d'>";
@@ -35,9 +33,7 @@ if (mysqli_num_rows($messages_query) > 0) {
         echo "<p><strong></strong> " . $message['timestamp'] . "</p>";      
         echo "</div>";
         echo "<div class='is'>";
-     
         echo "<form method='post' action='save_response.php'>";
-        
         echo "<input type='hidden' name='user_id' value='" . $message['user_id'] . "'>";
         echo "<button type='submit' name='response_submit'><i class='fa-solid fa-paper-plane'></i></button>";
         echo "</form>";

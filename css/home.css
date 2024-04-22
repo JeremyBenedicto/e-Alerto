@@ -92,7 +92,7 @@ body {
   background-color: #f1f1f1;
 }
 
-.content2 img {
+.content2 img, .content3 img {
   height: 55px;
   border-radius: 100%;
   border: solid rgb(71, 67, 67) 2px;
@@ -324,9 +324,41 @@ form{
 }
 
 
+.profil{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.profil img{
+  margin: 1rem;
+}
+.content1{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  margin: 2.5rem 15px 15px 15px;
+  padding: 0 .2rem .2rem .2rem;
+  box-shadow: var(--box-shadow);
+  background-color: #f1f1f1;
+}
+.content3{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  margin: 1rem 15px 15px 15px;
+  padding: 0 2rem 2rem 2rem;
+  border-radius: 50px;
+background: linear-gradient(145deg, #f0f0f0, #cacaca);
+box-shadow:  9px 9px 18px #bebebe,
+             -9px -9px 18px #ffffff;
+}
 
-
-
+.content1 .set h2{
+  margin-left: 1.5rem;
+}
 
 .dark-mode {
   body {

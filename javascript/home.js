@@ -53,5 +53,3 @@ $(document).ready(function () {
 });
 
 
-// Get the button element by its ID
-
