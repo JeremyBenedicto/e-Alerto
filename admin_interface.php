@@ -110,7 +110,7 @@ $conn->close();
       <div class="left-body">
          <div class="logo">
             <div class="logo1">
-            <img style="height: 150px;border-radius:100px;" src="assets/logo/main_logo.png" alt="eALERTO logo">
+            <img style="height: 150px;border-radius:100px;" src="assets/newlogo.png" alt="eALERTO logo">
             </div>
          </div>
          <div class="right-nav">

@@ -75,13 +75,14 @@
 .form-container{
    min-height: 100vh;
    filter: brightness(90%);
-   background-image: url(../assets/2.png);
+   background-image: url(../assets/newbg.png);
    background-size: cover;
    display: flex;
    align-items: center;
    justify-content: center;
    padding:40px;
 }
+
 
 .form-container form{
    padding:30px;
@@ -222,6 +223,7 @@ border: 1px solid rgba(197, 197, 197, 0.85);
    align-items: center;
    justify-content: center;
    padding:20px;
+   background-image: url(../assets/1.png);
 }
 
 .update-profile form{
@@ -232,6 +234,7 @@ border: 1px solid rgba(197, 197, 197, 0.85);
    width: 700px;
    text-align: center;
    border-radius: 5px;
+
 }
 
 .update-profile form img{
