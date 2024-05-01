@@ -47,6 +47,28 @@ if(isset($_POST['update_profile'])){
 
 }
 
+
+
+$sql = "SELECT email FROM user_form WHERE id = $user_id";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    while($row = $result->fetch_assoc()) {
+        $userEmail = $row["email"];
+    }
+} else {
+    echo "0 results";
+}
+
+
+if ($userEmail === "admin@gmail.com") {
+   $src = "admin_interface.php";
+} else {
+   $src = "home.php";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -105,10 +127,16 @@ if(isset($_POST['update_profile'])){
          </div>
       </div>
       <input type="submit" value="Update Profile" name="update_profile" class="btn">
-      <a href="home.php" class="delete-btn">Go Back</a>
+      
    </form>
 
 </div>
+<?php
+
+?>
+<a href="<?php echo $src; ?>" class="scroll-button">
+    <img src="assets/newlogo.png" alt="">
+</a>
 
 </body>
 </html>

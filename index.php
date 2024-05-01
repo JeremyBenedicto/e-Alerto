@@ -51,8 +51,7 @@ $conn->close();
 </head>
 <body>
     <div class="con">
-    <a href="admin_interface.php" class="x-button">
-                <img style="height: 30px;" src="assets/icon/left-arrow.png" alt=""></i></a>
+    
 <div class="upload1">
     <h1>Upload Photo</h1>
     <label for="photo" class="upload-btn">Choose Photo</label>
@@ -90,6 +89,8 @@ $conn->close();
             <?php endforeach; ?>
         </table>
     </div>
+
+    <a href="admin_interface.php" class="scroll-button"><img src="assets/newlogo.png" alt=""></a>
 <script src="javascript/photo_index.js"></script>
 </body>
 </html>

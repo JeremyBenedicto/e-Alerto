@@ -168,6 +168,10 @@
 
 
     </div>
+
+    <a href="admin_interface.php" class="scroll-button"><img src="assets/newlogo.png" alt=""></a>
+
+
     <script src="javascript/injury.js"></script>
 </body>
 

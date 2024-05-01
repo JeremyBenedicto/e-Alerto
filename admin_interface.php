@@ -159,10 +159,10 @@ $conn->close();
                <?php else : ?>
                   <img src="images/default-avatar.png" alt="Default Profile Image">
                <?php endif; ?>
+               <h3 style="color: green;"> <?php echo $admin_data['status']; ?></h3>
                <h2><?php echo $admin_data['firstname'] . " " . $admin_data['middlename'] . " " . $admin_data['lastname']; ?></h2>
                <h5>Admin</h5>
                <h3>Email: <?php echo $admin_data['email']; ?></h3>
-               <h3>Age: <?php echo $admin_data['age']; ?></h3>
                <h3>Address: <?php echo $admin_data['address']; ?></h3>
             </div>
          <?php endif; ?>
@@ -214,7 +214,7 @@ function fetchChatMessages() {
     };
     xhr.send();
 }
-setTimeout(fetchChatMessages, 2000);
+setInterval(fetchChatMessages, 5000);
 </script>
 
 

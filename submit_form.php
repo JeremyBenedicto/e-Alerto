@@ -1,10 +1,9 @@
 <?php
-// Check if the form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database connection
+
     $conn = new mysqli("localhost", "root", "", "user_db");
 
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -27,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nameofcaller = $_POST["nameofcaller"];
     $numofcaller = $_POST["numofcaller"];
     
-    // Check if wound_type is an array, if not set it to an empty array
+
     $wound_types = $_POST["wound_type"];
     $fracture_type = $_POST["fracture_type"];
     
-    // Check if emergency_type is an array, if not set it to an empty array
+
     $emergency_types = $_POST["emergency_type"];
     $others_text = $_POST["others_text"];
 
@@ -45,11 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo 'document.getElementById("message").innerText = "Error: ' . $stmt->error . '";</script>';
         echo '<script>window.location.href = "injury_report_form.php";</script>';
     }
-
-    
-    
-    
-
     $stmt->close();
     $conn->close();
 }

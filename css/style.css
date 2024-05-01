@@ -76,6 +76,7 @@
    min-height: 100vh;
    filter: brightness(90%);
    background-image: url(../assets/newbg.png);
+   background-attachment: fixed;
    background-size: cover;
    display: flex;
    align-items: center;
@@ -120,20 +121,53 @@ border: 1px solid rgba(197, 197, 197, 0.85);
    border-radius: 8px;
    width: 80%;
 }
-
-.close {
-   color: #aaa;
-   float: right;
-   font-size: 28px;
-   font-weight: bold;
+.downbot{
+   display: flex;
+   justify-content: end;
 }
-
-.close:hover,
-.close:focus {
-   color: black;
-   text-decoration: none;
+button {
+   --color: #00bb57;
+   font-family: inherit;
+   display: inline-block;
+   width: 6em;
+   height: 2.6em;
+   line-height: 2.5em;
+   overflow: hidden;
    cursor: pointer;
-}
+   margin: 20px;
+   font-size: 17px;
+   z-index: 1;
+   color: var(--color);
+   border: 2px solid var(--color);
+   border-radius: 6px;
+   position: relative;
+ }
+ 
+ button::before {
+   position: absolute;
+   content: "";
+   background: var(--color);
+   width: 150px;
+   height: 200px;
+   z-index: -1;
+   border-radius: 50%;
+ }
+ 
+ button:hover {
+   color: white;
+ }
+ 
+ button:before {
+   top: 100%;
+   left: 100%;
+   transition: 0.3s all;
+ }
+ 
+ button:hover::before {
+   top: -30px;
+   left: -30px;
+ }
+ 
 
 .login-container {
    position: relative;
@@ -228,7 +262,13 @@ border: 1px solid rgba(197, 197, 197, 0.85);
 
 .update-profile form{
    padding:20px;
-   background-color: var(--white);
+   /* From https://css.glass */
+background: rgba(255, 255, 255, 0.14);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.5px);
+-webkit-backdrop-filter: blur(8.5px);
+border: 1px solid rgba(255, 255, 255, 0.68);
    box-shadow: var(--box-shadow);
    text-align: center;
    width: 700px;
@@ -390,5 +430,25 @@ border: 1px solid rgba(197, 197, 197, 0.85);
  .typing-area button.active{
    opacity: 1;
    pointer-events: auto;
+ }
+ .scroll-button {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   width: 100px;
+   height: 100px;
+   color: white;
+   border: none;
+   border-radius: 50%;
+   cursor: pointer;
+   animation: spin 10s linear infinite;
+ }
+ .scroll-button img{
+   height: 100px;
+ }
+ 
+ @keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
  }
  

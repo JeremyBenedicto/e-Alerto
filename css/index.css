@@ -103,3 +103,23 @@ a:hover {
     justify-content: start;
     align-items: start;
 }
+.scroll-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    animation: spin 10s linear infinite;
+  }
+  .scroll-button img{
+    height: 100px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
