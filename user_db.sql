@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2024 at 01:22 AM
+-- Generation Time: Aug 16, 2024 at 10:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -40,15 +40,6 @@ CREATE TABLE `accident_record` (
   `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `accident_record`
---
-
-INSERT INTO `accident_record` (`accident_id`, `name`, `age`, `address`, `location`, `sex`, `date`, `vehicle_type`, `mobile_number`, `image`) VALUES
-(20, 'Juan Dela Cruz', 56, 'Cuyapa', 'Purok 3, Pantoc', 'male', '2024-03-26', 'tricycle', '0945512388', 'ff704ac8d94d61ac042a9a579399332e.png'),
-(21, 'jeremy cando benedicto', 44, 'Tagumpay', '96, Everlasting, Tagumpay', 'male', '2024-04-01', 'tricycle', '09157646467', 'appLogo.png'),
-(22, 'jeremy cando benedicto', 23, 'Tagumpay', 'tagumnpay', 'male', '2024-04-02', 'tricycle', '09157646467', '3695103.png');
-
 -- --------------------------------------------------------
 
 --
@@ -67,8 +58,7 @@ CREATE TABLE `admin_response` (
 --
 
 INSERT INTO `admin_response` (`id`, `user_id`, `message`, `timestamp`) VALUES
-(3, 19, 'Thank you for your valuable feedback. We appreciate your report and will take the necessary actions.', '2024-04-19 14:03:26'),
-(4, 15, 'Thank you for your valuable feedback. We appreciate your report and will take the necessary actions.', '2024-04-19 14:13:54');
+(3, 23, 'Thank you for your valuable report. We appreciate your message and will take the necessary actions.', '2024-05-02 01:13:15');
 
 -- --------------------------------------------------------
 
@@ -123,11 +113,12 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `user_id`, `unique_id`, `message`, `timestamp`) VALUES
-(1, 21, 0, 'masakit ipit', '2024-04-18 12:37:29'),
-(2, 21, 0, 'hello', '2024-04-18 13:06:10'),
-(3, 15, 0, 'kumain', '2024-04-18 14:11:02'),
-(4, 19, 0, 'fgfdgfd', '2024-04-19 13:44:33'),
-(5, 19, 0, 'dfgfdgf', '2024-04-19 13:47:59');
+(1, 24, 0, 'NASAKSAK', '2024-05-02 00:47:08'),
+(2, 25, 0, 'nabundol', '2024-05-02 00:48:59'),
+(4, 23, 0, 'hello', '2024-05-02 01:00:11'),
+(5, 23, 0, 'nabagok', '2024-05-02 01:12:49'),
+(6, 23, 0, 'sunog ', '2024-05-02 02:15:01'),
+(7, 28, 0, 'sfvdfvdfs', '2024-05-07 06:41:20');
 
 -- --------------------------------------------------------
 
@@ -146,11 +137,9 @@ CREATE TABLE `photos` (
 --
 
 INSERT INTO `photos` (`photo_id`, `photo_path`, `photo_type`) VALUES
-(58, 'uploads/1.png', 'image/png'),
 (59, 'uploads/2.png', 'image/png'),
-(60, 'uploads/4.png', 'image/png'),
 (61, 'uploads/3.png', 'image/png'),
-(63, 'uploads/1.png', 'image/png');
+(66, 'uploads/final 4.jpg', 'image/jpeg');
 
 -- --------------------------------------------------------
 
@@ -171,23 +160,22 @@ CREATE TABLE `user_form` (
   `age` int(100) NOT NULL,
   `address` varchar(255) NOT NULL,
   `gender` enum('male','female') NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status` varchar(255) NOT NULL,
+  `id_photo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user_form`
 --
 
-INSERT INTO `user_form` (`id`, `unique_id`, `firstname`, `email`, `cpnum`, `password`, `image`, `middlename`, `lastname`, `age`, `address`, `gender`, `status`) VALUES
-(7, 0, 'Jeremy', 'admin@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', '2023-12-15.png', 'Cando', 'Benedicto', 1, 'Tagumpay/Gabaldon', 'male', 'Active Now'),
-(14, 805713, 'Gabaldon ', 'jeremybenedicto2020@gmail.com', '0', '202cb962ac59075b964b07152d234b70', '2.png', 'MDRRMO', 'Benedicto', 22, 'Everlasting/Tagumpay', 'female', 'Active Now'),
-(15, 625685, 'Sam', 'sam@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'Russel', 'Cabaltica', 22, 'Sawmill', 'male', 'Active Now'),
-(16, 389059, 'owera', 'owera@gmail.com', '0', '202cb962ac59075b964b07152d234b70', 'logo.png', 'ernez', 'umali', 23, 'apayuc', 'male', 'Active Now'),
-(17, 125385, 'Sir Dane', 'Dane@gmail.com', '0', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'Irang', 'Sisor', 18, 'South', 'male', 'Offline Now'),
-(18, 731219, 'Rafael', 'johnrafaellee@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'ff704ac8d94d61ac042a9a579399332e.png', 'Benedicto', 'Lee', 22, 'Tagumpay', 'male', 'Active Now'),
-(19, 756548, 'a', 'a@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'appLogo.png', 'a', 'a', 12, 'Tagumpay', 'female', 'Active Now'),
-(20, 305162, 'maru', 'webpage651@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'brother-icon-1458x2048-32dx9t45.png', 'secret', 'ayaw', 99, 'Tagumpay', 'male', 'Active Now'),
-(21, 468999, 'Jeremy', 'jeremy@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'download (1).jpg', 'Cando', 'Benedicto', 22, '96 Everlasting', 'male', 'Active Now');
+INSERT INTO `user_form` (`id`, `unique_id`, `firstname`, `email`, `cpnum`, `password`, `image`, `middlename`, `lastname`, `age`, `address`, `gender`, `status`, `id_photo`) VALUES
+(7, 0, 'MDRRMO', 'admin@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'newlogo.png', 'e-Alerto', 'Admin', 22, 'Tagumpay/Gabaldon', 'male', 'Active Now', NULL),
+(22, 915515, 'Ernez Louie', 'oweramaru@gmail.com', '09584256322', '202cb962ac59075b964b07152d234b70', 'IMG_0947.JPG', 'Ubarro', 'Owera', 21, 'Purok 4/ Cuyapa', 'male', 'Active Now', NULL),
+(23, 940654, 'Jeremy', 'jeremybenedicto@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'FB_IMG_1714400082100.jpg', 'Cando', 'Benedicto', 21, 'Everlasting/ Tagumpay', 'male', 'Active Now', NULL),
+(24, 919230, 'John Rafael', 'johnrafaellee@gmail.com', '09451237458', '202cb962ac59075b964b07152d234b70', 'IMG_20240223_214751.jpg', 'Benedicto', 'Lee', 21, 'Cadena de Amor', 'male', 'Active Now', NULL),
+(25, 879242, 'Sam Russel ', 'sam@gmail.com', '09452123546', '202cb962ac59075b964b07152d234b70', 'FB_IMG_1714400782969.jpg', 'Bautista', 'Cabaltica', 21, 'River side 2/ Sawmill', 'male', 'Active Now', NULL),
+(27, 334042, 'owera', 'ad@gmail.com', '2222', '202cb962ac59075b964b07152d234b70', 'Purple and Blue Modern Upcoming Event Announcement Carousel Instagram Post (3).png', 'ernez', 'umali', 2, 'vghfgh', 'male', 'Active Now', NULL),
+(28, 416831, 'jeremy', 'jeremyb@gmail.com', '09157646467', '202cb962ac59075b964b07152d234b70', 'profile.png', 'cando', 'benedicto', 22, 'Tagumpay', 'female', 'Active Now', 'human.jpg');
 
 -- --------------------------------------------------------
 
@@ -208,11 +196,15 @@ CREATE TABLE `user_locations` (
 --
 
 INSERT INTO `user_locations` (`id`, `user_id`, `latitude`, `longitude`, `timestamp`) VALUES
-(1, 21, '15.484189916666669', '121.31221033333335', '2024-04-18 12:37:34'),
-(2, 21, '15.484209100000001', '121.3122096', '2024-04-18 13:06:33'),
-(3, 15, '15.484176214285716', '121.31221085714287', '2024-04-18 14:11:08'),
-(4, 19, '15.484209100000001', '121.3122096', '2024-04-19 13:44:38'),
-(5, 19, '15.484209100000001', '121.3122096', '2024-04-19 13:48:04');
+(5, 23, '15.4840291', '121.3122275', '2024-04-29 14:37:36'),
+(6, 24, '15.4840291', '121.3122275', '2024-04-29 14:38:35'),
+(7, 22, '15.4840291', '121.3122275', '2024-04-29 14:41:49'),
+(8, 24, '15.455827194981422', '121.33762951725001', '2024-05-02 00:47:12'),
+(9, 25, '15.45578', '121.337623', '2024-05-02 00:49:06'),
+(11, 23, '15.455827194981422', '121.33762951725001', '2024-05-02 01:00:18'),
+(12, 23, '15.455910362798612', '121.33775895172607', '2024-05-02 01:12:56'),
+(13, 23, '15.455817266435442', '121.33762414911163', '2024-05-02 02:15:07'),
+(14, 28, '15.484093999999999', '121.312214', '2024-05-07 06:41:25');
 
 --
 -- Indexes for dumped tables
@@ -269,13 +261,13 @@ ALTER TABLE `user_locations`
 -- AUTO_INCREMENT for table `accident_record`
 --
 ALTER TABLE `accident_record`
-  MODIFY `accident_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `accident_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `admin_response`
 --
 ALTER TABLE `admin_response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `injury_form`
@@ -287,25 +279,25 @@ ALTER TABLE `injury_form`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `photo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `photo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `user_form`
 --
 ALTER TABLE `user_form`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_locations`
 --
 ALTER TABLE `user_locations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
