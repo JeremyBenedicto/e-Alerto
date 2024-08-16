@@ -70,6 +70,34 @@ if (isset($_POST['submit'])) {
    </div>
    <div id="termsModal" class="modal">
       <div class="modal-content">
+      <h1>Data Privacy Notice</h1>
+    <p>This Data Privacy Notice provides additional information about how we handle your personal data in accordance with applicable data protection laws, including the Data Privacy Act of 2012 of the Philippines. It supplements our Privacy Policy and informs you of your rights regarding the personal data we collect and process.</p>
+
+    <h2>Your Rights Under the Data Privacy Act of 2012:</h2>
+    <ul>
+        <li>Right to Access: You have the right to request access to the personal data we hold about you.</li>
+        <li>Right to Rectification: You can request the correction of any inaccurate or incomplete personal data.</li>
+        <li>Right to Erasure: You may request the deletion of your personal data when it is no longer needed for the purposes for which it was collected, except in certain circumstances such as when the data is necessary for legal obligations.</li>
+        <li>Right to Object: You have the right to object to processing activities that are based on our legitimate interests or for direct marketing purposes.</li>
+        <li>Right to Data Portability: You can request a copy of your personal data in a structured, commonly used, and machine-readable format, and have it transmitted to another entity.</li>
+        <li>Right to Withdraw Consent: If you have provided consent for data processing, you can withdraw it at any time.</li>
+    </ul>
+
+    <h2>How to Exercise Your Rights:</h2>
+    <p>To exercise your rights under the Data Privacy Act of 2012, please contact us using the information provided at the end of this Privacy Policy. We will respond to your request as promptly as possible and within the timeframes specified by law.</p>
+
+    <h2>Security Measures:</h2>
+    <p>We implement appropriate technical and organizational measures to safeguard your personal data in accordance with the Data Privacy Act of 2012.</p>
+
+    <h2>Data Retention:</h2>
+    <p>We retain your personal data only for as long as necessary to fulfill the purposes outlined in this Privacy Policy or to comply with legal requirements, including the retention periods prescribed by the Data Privacy Act of 2012.</p>
+
+    <h2>International Data Transfers:</h2>
+    <p>If we transfer your personal data outside the Philippines, we will ensure that appropriate safeguards are in place to protect your data, as required by the Data Privacy Act of 2012.</p>
+
+    <h2>Contact Information:</h2>
+    <p>If you have any questions about this Data Privacy Notice or wish to exercise your data privacy rights under the Data Privacy Act of 2012, you can contact us using the information provided at the end of this Privacy Policy.</p>
+    
       <h1>Privacy Policy</h1>
          <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
          <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. </a>.</p>

@@ -19,10 +19,21 @@ if(isset($_POST['submit'])){
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'uploaded_img/'.$image;
 
-   // Generate a unique random number
+
+   if(isset($_FILES['validphoto']) && $_FILES['validphoto']['error'] === UPLOAD_ERR_OK) {
+       $id_photo = $_FILES['validphoto']['name'];
+       $id_photo_tmp_name = $_FILES['validphoto']['tmp_name'];
+       $id_photo_folder = 'uploaded_img/'.$id_photo;
+
+       move_uploaded_file($id_photo_tmp_name, $id_photo_folder);
+   } else {
+  
+       $id_photo = ''; 
+   }
+
    $unique_id = mt_rand(100000, 999999);
    
-   // Check if the generated random number already exists
+
    $check_unique_id = mysqli_query($conn, "SELECT unique_id FROM `user_form` WHERE unique_id = '$unique_id'");
    while(mysqli_num_rows($check_unique_id) > 0) {
        $unique_id = mt_rand(100000, 999999);
@@ -40,8 +51,8 @@ if(isset($_POST['submit'])){
          $message[] = 'Image size is too large!';
       } else {
          $status = "Active now";
-         $insert = mysqli_query($conn, "INSERT INTO `user_form`(unique_id, firstname, middlename, lastname, age, email, cpnum, password, address, gender, image, status)
-          VALUES('$unique_id', '$firstname', '$middlename', '$lastname', '$age', '$email', '$cpnum' , '$password', '$address', '$gender', '$image','$status')") or die('Query failed');
+         $insert = mysqli_query($conn, "INSERT INTO `user_form`(unique_id, firstname, middlename, lastname, age, email, cpnum, password, address, gender, image, id_photo, status)
+          VALUES('$unique_id', '$firstname', '$middlename', '$lastname', '$age', '$email', '$cpnum' , '$password', '$address', '$gender', '$image', '$id_photo', '$status')") or die('Query failed');
 
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);
@@ -82,6 +93,13 @@ if(isset($_POST['submit'])){
          }
       }
       ?>
+     <div class="pi">
+    <label for="image" class="r">
+        <span class="upload-icon">&#x21ea;</span>
+        <span class="text">Upload Profile Picture</span>
+        <input type="file" id="image" name="image" accept="image/jpg, image/jpeg, image/png" class="b">
+    </label>
+</div>
       <input type="text" name="firstname" placeholder="Enter First Name" class="box" required>
       <input type="text" name="middlename" placeholder="Enter Middle Name" class="box" required>
       <input type="text" name="lastname" placeholder="Enter Last Name" class="box" required>
@@ -96,7 +114,14 @@ if(isset($_POST['submit'])){
          <option value="Male">Male</option>
          <option value="Female">Female</option>
       </select>
-      <input type="file" name="image" class="box" accept="image/jpg, image/jpeg, image/png">
+      <div class="pii">
+    <label for="validphoto" class="d">
+        <span class="upload-icon">&#x21ea;</span>
+        <span class="text">Upload ID or Valid Identification</span>
+        <input type="file" id="validphoto" name="validphoto" accept="image/jpg, image/jpeg, image/png" class="b">
+    </label>
+</div>
+      
       <input type="submit" name="submit" value="Register Now" class="btn">
       <p>Already have an account? <a href="login.php">Login Now</a></p>
    </form>

@@ -189,6 +189,10 @@ button {
    color:var(--black);
    margin:5px 0;
    background-color: var(--light-bg);
+   
+}
+.des{
+   padding: 0 4rem;
 }
 
 .form-container form p{
@@ -248,6 +252,12 @@ button {
 
 .container .profile p a:hover{
    text-decoration: underline;
+}
+.pi{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
 }
 
 .update-profile{
@@ -451,4 +461,92 @@ border: 1px solid rgba(255, 255, 255, 0.68);
    0% { transform: rotate(0deg); }
    100% { transform: rotate(360deg); }
  }
- 
+ .pi {
+   margin-top: 20px;
+   border-radius: 5px;
+background: #e0e0e0;
+box-shadow: inset 5px 5px 5px #d5d5d5,
+            inset -5px -5px 5px #ebebeb;
+}
+
+.b {
+   display: none;
+}
+
+.upload-icon {
+   font-size: 24px;
+   margin-right: 5px;
+}
+
+.text {
+   font-size: 18px;
+}
+
+.r + .upload-icon::before {
+   content: "Browse";
+   display: inline-block;
+   padding: 5px 10px;
+   background-color: #007bff;
+   color: #fff;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.r:focus + .upload-icon::before {
+   background-color: #0056b3;
+}
+
+.r:focus + .upload-icon::before,
+.r:active + .upload-icon::before {
+   outline: none;
+}
+
+.r:focus + .upload-icon,
+.r:active + .upload-icon {
+   color: #0056b3;
+}
+.pii{
+   height: 10rem;
+   margin-top: 20px;
+   border-radius: 5px;
+background: #e0e0e0;
+box-shadow: inset 5px 5px 5px #d5d5d5,
+            inset -5px -5px 5px #ebebeb;
+}
+
+.b {
+   display: none;
+}
+
+.upload-icon {
+   font-size: 24px;
+   margin-right: 5px;
+}
+
+.text {
+   font-size: 18px;
+}
+
+.d + .upload-icon::before {
+   content: "Browse";
+   display: inline-block;
+   padding: 5px 10px;
+   background-color: #007bff;
+   color: #fff;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+.d:focus + .upload-icon::before {
+   background-color: #0056b3;
+}
+
+.d:focus + .upload-icon::before,
+.d:active + .upload-icon::before {
+   outline: none;
+}
+
+.d:focus + .upload-icon,
+.d:active + .upload-icon {
+   color: #0056b3;
+}

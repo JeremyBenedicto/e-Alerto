@@ -159,23 +159,19 @@ body {
 .set {
   width: 100%;
 }
-
 .set h2 {
   width: 90%;
   border-bottom: solid rgb(77, 77, 77) 1px;
 }
 .set4  {
-
   width: 100%;
-
 }
+
 .set4 h2{
   width: 75%;
   margin-left: 1.8rem;
   border-bottom: solid rgb(77, 77, 77) 1px;
 }
-
-
 .emergency {
   border-radius: 17px;
   background: linear-gradient(145deg, #cacaca, #f0f0f0);

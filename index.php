@@ -54,7 +54,7 @@ $conn->close();
     
 <div class="upload1">
     <h1>Upload Photo</h1>
-    <label for="photo" class="upload-btn">Choose Photo</label>
+    <label for="photo" class="upload-btn"><h3>Infographic/News</h3></label>
     <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" name="photo" id="photo">
         <button type="submit" id="uploadButton">Upload</button>

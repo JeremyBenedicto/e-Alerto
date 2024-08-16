@@ -211,7 +211,7 @@ $currentTime = new DateTime('now');
    <div class="tabs">
       <button class="tab" onclick="showTab('tab1')"><img src="assets/icon/home.png" alt=""></button>
       <button class="tab" onclick="showTab('tab2')"><img src="assets/icon/user.png" alt=""></button>
-      <button class="tab" onclick="showTab('tab3')"><img style="height: 40px;" src="assets/newlogo.png" alt=""></button>
+      <button class="tab" onclick="showTab('tab3')"><img style="height: 80px; margin-top:-3rem;" src="assets/newlogo.png" alt=""></button>
       <button class="tab" onclick="showTab('tab4')"><img src="assets/icon/message.png" alt=""></button>
       <button class="tab" onclick="showTab('tab5')"><img src="assets/icon/setting.png" alt=""></button>
    </div>
