@@ -7,7 +7,7 @@ $user_id = $_SESSION['user_id'];
 if (!isset($user_id)) {
    header('location:login.php');
 };
-
+// dfjdfjkfdfhdskjfhdsfkjd
 if (isset($_GET['logout'])) {
 
    $offline_status_query = mysqli_query($conn, "UPDATE `user_form` SET status = 'Offline Now' WHERE id = '$user_id'");
