@@ -304,6 +304,7 @@ button {
 }
 
 #red {
+  margin-top: -5px;
   border-bottom: solid white 1px;
 }
 

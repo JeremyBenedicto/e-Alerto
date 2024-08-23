@@ -7,7 +7,6 @@ $user_id = $_SESSION['user_id'];
 if (!isset($user_id)) {
    header('location:login.php');
 };
-// dfjdfjkfdfhdskjfhdsfkjd
 if (isset($_GET['logout'])) {
 
    $offline_status_query = mysqli_query($conn, "UPDATE `user_form` SET status = 'Offline Now' WHERE id = '$user_id'");
@@ -126,7 +125,8 @@ $conn->close();
                   <div id="popperContent4" class="popper-content">
                   <div class="admin-actions">
                      <a href="injury_report_form.php" class="btn" id="red">Add Record</a>
-                     <a href="view_records.php" class="btn" id="out">View Record</a>
+                     <a href="view_records.php" class="btn" id="red">View Record</a>
+                     <a href="verify_user.php" class="btn" id="out"> Verify User</a>
                   </div>
                </div>
 

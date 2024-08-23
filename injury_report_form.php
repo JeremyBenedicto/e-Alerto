@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,9 +72,9 @@
                 <input type="text" name="address">
                 <label for="bp">Blood Pressure:</label>
                 <input type="text" name="bp">
-                <label for="nameofcaller">Name of caller:</label>
+                <label for="nameofcaller">Name of reporter:</label>
                 <input type="text" name="nameofcaller">
-                <label for="numofcaller">No. of caller:</label>
+                <label for="numofcaller">No. of reporter:</label>
                 <input type="text" name="numofcaller">
             </div>
             </div>
