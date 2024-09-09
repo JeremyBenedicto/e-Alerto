@@ -1,5 +1,9 @@
 
-
+<p><strong>Accident Mark:</strong> <?php if ($row['accident_mark']): ?>
+                    <img src="<?php echo htmlspecialchars($row['accident_mark']); ?>" alt="Accident Mark">
+                <?php else: ?>
+                    No image
+                <?php endif; ?></p>
 
 
 

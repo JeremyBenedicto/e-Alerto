@@ -220,7 +220,6 @@ $currentTime = new DateTime('now');
    <script>
       const sendButton = document.getElementById('send');
 
-      // Attach the sendLocation function to the button's click event
       sendButton.addEventListener('click', sendLocation);
 
       function sendLocation() {
@@ -235,7 +234,7 @@ $currentTime = new DateTime('now');
          const latitude = position.coords.latitude;
          const longitude = position.coords.longitude;
 
-         // Send location data to PHP script
+
          const xhr = new XMLHttpRequest();
          xhr.open("POST", "save_location.php", true);
          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");

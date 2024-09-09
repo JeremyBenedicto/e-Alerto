@@ -86,3 +86,37 @@ h3 {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+/* Style for the action-buttons container */
+.action-buttons {
+    text-align: center; /* Center align the button */
+    margin-top: 20px; /* Add space above the button */
+}
+
+/* Base button styling */
+.verify-btn {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    padding: 12px 24px; /* Padding inside the button */
+    border: none; /* Remove borders */
+    border-radius: 25px; /* Rounded corners */
+    text-decoration: none; /* Remove underline from the text */
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+    font-size: 16px; /* Increase font size */
+    font-weight: 500; /* Medium font weight */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    display: inline-block; /* Ensure it stays inline */
+}
+
+/* Hover effect */
+.verify-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-3px); /* Lift the button slightly */
+}
+
+/* Additional custom styling if needed */
+.custom-verify-btn {
+    width: 200px; /* Set a specific width */
+    margin: 0 auto; /* Center it horizontally */
+    display: block; /* Ensure it behaves as a block element */
+}

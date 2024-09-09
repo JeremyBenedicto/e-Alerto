@@ -1,65 +1,60 @@
 <?php
-include 'php/config.php';
+// Database connection
+$conn = new mysqli("localhost", "root", "", "user_db");
 
-$query = "SELECT * FROM `accident_record`";
-$result = mysqli_query($conn, $query);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to select only the needed records from the injury_form table
+$sql = "SELECT id, name, age, sex, civil_status, accident_mark FROM injury_form";
+$result = $conn->query($sql);
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Accident Records</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
-                        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
-                        crossorigin="anonymous" 
-                        referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/viewrecord.css">
+    <title>View Injury Records</title>
+    <link rel="stylesheet" href="css/view_records.css"> <!-- Link to the CSS file -->
 </head>
-
 <body>
-        <div class="tab">
-            <a href="admin_interface.php" class="x-button">
-                <img style="height: 30px;" src="assets/icon/left-arrow.png" alt=""></i></a>
-            <h2>Accident Records</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Address</th>
-                        <th>Location</th>
-                        <th>Sex</th>
-                        <th>Vehicle Type</th>
-                        <th>Date</th>
-                        <th>Mobile Number</th>
-                        <th>Image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($row = mysqli_fetch_assoc($result)) {
+    <div class="container">
+        <a href="admin_interface.php" class="back-button">←</a>
+        <h1>Injury Records</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Sex</th>
+                    <th>Civil Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>{$row['accident_id']}</td>";
-                        echo "<td>{$row['name']}</td>";
-                        echo "<td>{$row['age']}</td>";
-                        echo "<td>{$row['address']}</td>";
-                        echo "<td>{$row['location']}</td>";
-                        echo "<td>{$row['sex']}</td>";
-                        echo "<td>{$row['vehicle_type']}</td>";
-                        echo "<td>{$row['date']}</td>";
-                        echo "<td>{$row['mobile_number']}</td>";
-                        echo "<td><img src='image_accident/{$row['image']}' alt='Accident Image'></td>";
+                        echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['age']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['sex']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['civil_status']) . "</td>";
+                        echo "<td><a href='view_details.php?id=" . htmlspecialchars($row['id']) . "' class='view-details-button'>View Details</a></td>";
                         echo "</tr>";
                     }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                } else {
+                    echo "<tr><td colspan='6'>No records found</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 </body>
-
 </html>
+
+<?php
+$conn->close();
+?>

@@ -79,8 +79,6 @@
             </div>
             </div>
 
-        
-
     <div class="con2">
     <div class="wound">
     <h3>Select the type(s) of wounds:</h3>
@@ -146,6 +144,10 @@
   <label for="others_checkbox">Others (specify):</label>
   <input type="text" id="others_text" name="others_text"><br>
   </div>
+  <br>
+  <label for="accident_mark">Accident Mark:</label>
+                    <input type="file" id="accident_mark" name="accident_mark" accept="image/*"><br>
+        
   </div>
 <input type="submit" value="Submit">
 </form>

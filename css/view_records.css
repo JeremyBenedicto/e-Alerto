@@ -1,0 +1,103 @@
+/* General page styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container styling */
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Back button styling */
+.back-button {
+    text-decoration: none;
+    color: #333;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    background: #e0e0e0;
+    box-shadow: inset 5px 5px 10px #b1b1b1,
+                inset -5px -5px 10px #ffffff;
+}
+
+.back-button:hover {
+    background-color: #c6c6c6;
+}
+
+/* Header styling */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+    color: #333;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* View Details Button styling */
+.view-details-button {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #28a745; /* Green color */
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #28a745;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.view-details-button:hover {
+    background-color: #218838; /* Darker green */
+    border-color: #1e7e34;
+    color: #ffffff;
+}
+
+.view-details-button:active {
+    background-color: #1e7e34; /* Even darker green */
+    border-color: #1c7430;
+}

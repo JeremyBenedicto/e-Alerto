@@ -23,6 +23,22 @@ if (mysqli_num_rows($admin_query) > 0) {
    $admin_data = mysqli_fetch_assoc($admin_query);
 }
 
+$query = "SELECT MONTH(date) as month, COUNT(*) as count FROM injury_form GROUP BY MONTH(date)";
+$result = $conn->query($query);
+
+$monthly_data = [];
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $monthly_data[(int)$row['month']] = $row['count'];
+    }
+}
+
+$conn->close();
+
+// Prepare data for JavaScript
+$monthly_data_json = json_encode($monthly_data);
+
 // Database connection (replace with your own details)
 $db_host = 'localhost';
 $db_username = 'root';
@@ -70,6 +86,7 @@ $conn->close();
 
     <!-- Include Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
@@ -83,7 +100,8 @@ $conn->close();
       <div class="main-body">
          <div class="upper">
             <div class="windy"><iframe width="650" height="300" src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=5&overlay=wind&product=ecmwf&level=surface&lat=15.496&lon=121.333" frameborder="0"></iframe></div>
-            <div class="weather-time"><img style="height: 300px;" src="assets/bar_graph.png" alt="Image 2"></div>
+            <div class="weather-time"><canvas id="injuryChart" width="40" height="20"></canvas>
+            </div>
          </div>
          <div class="lower">
             <div class="graph"><a class="weatherwidget-io" href="https://forecast7.com/en/15d52121d31/gabaldon/" data-label_1="GABALDON" data-label_2="WEATHER" data-theme="original" >GABALDON WEATHER</a>
@@ -186,6 +204,7 @@ $conn->close();
                <?php echo $admin_data['status'];?>
                </div>
       </div>
+      
       <section class="users">
       <div style="display: none;" class="search">
         <span class="text">Select an user to start chat</span>
@@ -215,6 +234,39 @@ function fetchChatMessages() {
     xhr.send();
 }
 setInterval(fetchChatMessages, 5000);
+
+
+const monthlyData = <?php echo $monthly_data_json; ?>;
+
+    // Prepare labels and data for the chart
+    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const data = [];
+
+    for (let i = 1; i <= 12; i++) {
+        data.push(monthlyData[i] || 0);
+    }
+
+    const ctx = document.getElementById('injuryChart').getContext('2d');
+    const injuryChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Injuries',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 </script>
 
 
