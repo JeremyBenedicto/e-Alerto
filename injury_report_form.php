@@ -145,8 +145,7 @@
   <input type="text" id="others_text" name="others_text"><br>
   </div>
   <br>
-  <label for="accident_mark">Accident Mark:</label>
-                    <input type="file" id="accident_mark" name="accident_mark" accept="image/*"><br>
+  
         
   </div>
 <input type="submit" value="Submit">
@@ -156,7 +155,7 @@
 
 
         
-        <button id="downloadBtn">Download Image</button>
+
 
         <div class="drawing">
             <canvas id="canvas" width="500" height="500"></canvas>

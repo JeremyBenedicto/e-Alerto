@@ -39,15 +39,17 @@ document.addEventListener('DOMContentLoaded', function() {
         isDrawing = false;
     });
 
+    document.getElementById('myForm').addEventListener('submit', function(e) {
+        // Convert canvas to data URL
+        var canvasData = canvas.toDataURL('image/png');
 
-    document.getElementById('downloadBtn').addEventListener('click', function() {
-        var link = document.createElement('a');
-        link.download = 'canvas_image.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
+        // Create a hidden input to store the canvas data
+        var hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'canvas_image';
+        hiddenInput.value = canvasData;
+
+        // Append hidden input to the form
+        this.appendChild(hiddenInput);
     });
 });
-
-
-
-    

@@ -1,35 +1,31 @@
-<?php
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = new mysqli("localhost", "root", "", "user_db");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $accident_mark = '';
-    if (isset($_FILES['accident_mark']) && $_FILES['accident_mark']['error'] == 0) {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES["accident_mark"]["name"]);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    // Handle the canvas image data
+    if (!empty($_POST['canvas_image'])) {
+        $canvas_image_data = $_POST['canvas_image'];
+        $canvas_image_data = str_replace('data:image/png;base64,', '', $canvas_image_data);
+        $canvas_image_data = str_replace(' ', '+', $canvas_image_data);
+        $canvas_image = base64_decode($canvas_image_data);
 
+        $canvas_file_name = uniqid() . '.png';
+        $canvas_file_path = 'uploads/' . $canvas_file_name;
 
-        $check = getimagesize($_FILES["accident_mark"]["tmp_name"]);
-        if ($check !== false) {
-            if (move_uploaded_file($_FILES["accident_mark"]["tmp_name"], $target_file)) {
-                $accident_mark = $target_file;
-            } else {
-                echo '<script>alert("Sorry, there was an error uploading your file.");</script>';
-            }
+        if (file_put_contents($canvas_file_path, $canvas_image)) {
+            $accident_mark = $canvas_file_path;
         } else {
-            echo '<script>alert("File is not an image.");</script>';
+            echo '<script>alert("Error saving canvas image.");</script>';
         }
     }
 
     $stmt = $conn->prepare("INSERT INTO injury_form (name, age, sex, civil_status, NO1, PO1, TO1, DO1, date, address, bp, nameofcaller, numofcaller, wound_type, fracture_type, emergency_types, others_text, accident_mark) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sissssssssssssssss", $name, $age, $sex, $civil_status, $NO1, $PO1, $TO1, $DO1, $date, $address, $bp, $nameofcaller, $numofcaller, $wound_types, $fracture_type, $emergency_types, $others_text, $accident_mark);
 
+    // Other form fields
     $name = $_POST["name"];
     $age = $_POST["age"];
     $sex = $_POST["sex"];
@@ -47,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fracture_type = $_POST["fracture_type"];
     $emergency_types = $_POST["emergency_type"];
     $others_text = $_POST["others_text"];
-    
+
     if ($stmt->execute()) {
         echo '<script>alert("Form submitted successfully.");';
         echo 'document.getElementById("message").innerText = "Submission is successful.";</script>';
